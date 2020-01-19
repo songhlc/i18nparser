@@ -1,0 +1,28 @@
+{
+  "name": "i18nparser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/songhlc/i18nparser.git",
+  "author": "songhlc <songhlc@yonyou.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "babel-node --inspect-brk packages/html/index.js",
+    "test": "jest"
+  },
+  "jest": {
+    
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "html5parser": "^1.1.0",
+    "jest": "^24.9.0",
+    "recast": "^0.18.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.3"
+  }
+}

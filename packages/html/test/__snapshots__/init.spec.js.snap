@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`测试init 测试tagRule 1`] = `
+" <!doctype html>
+    <html>
+      <body>
+        <h1 id=\\"hello\\">Hello world</h1>
+        <h2 title=\\"有没有翻译\\">中文翻译</h2>
+        <h3 data-bind=\\"text: '你好'\\" data-i18nparser=\\"i18nparser\\">世界</h3>
+        <script>
+          window.alert('error')
+          function aaa (p) {
+            var b = p + '1'
+            console.log(b);
+          } 
+        </script>
+      </body>
+    </html>
+    "
+`;
+
+exports[`测试init 测试textRule 1`] = `
+" <!doctype html>
+    <html>
+      <body>
+        <h1 id=\\"hello\\">Hello world</h1>
+        <h2 title=\\"有没有翻译\\">textrule规则</h2>
+        <h3 data-bind=\\"text: '你好'\\">textrule规则</h3>
+        <script>
+          window.alert('error')
+          function aaa (p) {
+            var b = p + '1'
+            console.log(b);
+          } 
+        </script>
+      </body>
+    </html>
+    "
+`;
+
+exports[`测试init 测试空tagRule，空scriptRule，空textRule 1`] = `
+" <!doctype html>
+    <html>
+      <body>
+        <h1 id=\\"hello\\">Hello world</h1>
+        <h2 title=\\"有没有翻译\\">中文翻译</h2>
+        <h3 data-bind=\\"text: '你好'\\">世界</h3>
+        <script>
+          window.alert('error')
+          function aaa (p) {
+            var b = p + '1'
+            console.log(b);
+          } 
+        </script>
+      </body>
+    </html>
+    "
+`;

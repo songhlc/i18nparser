@@ -9,8 +9,12 @@ const {
   arrowFunctionExpression
 } = recast.types.builders
 import needtranslate from '../packages/utils/needtraslate'
+// var input = `
+//   a(cb.t('xxx-id'))
+//   a("这是个什么问题")
+// `
 var input = `
-root.$Message.success(cb.lang.template("needtranslate"),'当前单据没有走审批流')
+root.$Message.success(cb.lang.template("needtranslate"),'当前单据没有走审批流');
 var a = {
   data () {
     return {
@@ -46,21 +50,20 @@ h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
  * */
 // 
 function generateCallExpression (resid) {
-  var expression = `cb.lang.template("${ resid }")`
-  var ast = recast.parse(expression)
-  var d = expressionStatement(
-    callExpression(
-      memberExpression(
-        memberExpression(id('cb'), id('lang')),
-        id('template')
-      ),
-      [literal(resid)]
-    )
+  // var expression = `cb.lang.template("${ resid }")`
+  // var ast = recast.parse(expression)
+  // expressionStatement 会在末尾添加分号“；”，改成直接用callExpression
+  var d = callExpression(
+    memberExpression(
+      memberExpression(id('cb'), id('lang')),
+      id('template')
+    ),
+    [literal(resid)]
   )
-  debugger
-  return d || ast.program.body[0]
+  return d
 }
 var jsast = recast.parse(input)
+debugger
 // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
 recast.visit(jsast, {
   // visitStatement
@@ -69,7 +72,6 @@ recast.visit(jsast, {
     var { node } = path
     // 判断参数里是否包含call和literal
     node.expression.arguments.forEach((arg, index) => {
-      debugger
       // 如果是字符型
       if (arg.type === "Literal") {
         if (needtranslate(arg.value)) {

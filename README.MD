@@ -45,6 +45,6 @@
 
 12.<ko-export-excel-frontend params = "filename: '超市订单报表' +  new Date().format('yyyy-MM-dd'),exportText: '导出Excel', exportData: $root.exportData, disabled: excelDisable"></ko-export-excel-frontend>
 
-13.<y-modal data-bind="{textOk:'中文'}"></y-modal>
+13.<y-modal params="{textOk:'中文'}"></y-modal>
 
-## ko自定义Tag需要翻译的中文属性一般为 title,其他根据传入组件属性自己定义
+## ko自定义Tag属性params需要翻译的中文属性一般为 title,其他根据传入组件属性自己定义

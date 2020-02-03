@@ -32,6 +32,16 @@
       ],
       "program": "${workspaceFolder}/debug/script.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "vue",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/vue.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     }
   ]
 }

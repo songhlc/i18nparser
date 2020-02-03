@@ -15,7 +15,10 @@ import needtranslate from '../packages/utils/needtraslate'
 // `
 var input = `
 root.$Message.success(cb.lang.template("needtranslate"),'当前单据没有走审批流');
-var a = {
+var b = '现金';
+var b = '现金：'+ 10000;
+var a;
+a = {
   data () {
     return {
       name: 1,
@@ -63,15 +66,32 @@ function generateCallExpression (resid) {
   return d
 }
 var jsast = recast.parse(input)
-debugger
 // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
 recast.visit(jsast, {
   // visitStatement
-  // visitExpression
+  visitStatement: function (path) {
+    // BinaryExpression  'a'+'b'
+    var { node } = path
+    var output = recast.print(node).code
+    console.log('visitStatement:', output)
+    debugger
+    return false
+  },
+  // 便利属性定义 var b = 'test'
+  visitIdentifier: function (path) {
+    var { node } = path
+    var output = recast.print(node).code
+    console.log('visitIdentifier:', output)
+    debugger
+    return false
+  },
   visitExpressionStatement: function (path) {
     var { node } = path
     // 判断参数里是否包含call和literal
-    node.expression.arguments.forEach((arg, index) => {
+    var output = recast.print(node).code
+    console.log('visitExpressionStatement:', output);
+    debugger
+    node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
       // 如果是字符型
       if (arg.type === "Literal") {
         if (needtranslate(arg.value)) {

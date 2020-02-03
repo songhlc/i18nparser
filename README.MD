@@ -32,3 +32,19 @@
 <div data-bind="{text:'中文', value:function(){return cb.lang.template('xxxid')+ 'test'}}"></div>
 
 6.<div data-bind="i18n:'xxx-id'">中文</div> =><div data-bind="">中文</div> => 转1
+
+7.<div data-bind="attr:{title:'中文'}"></div>
+
+8. <div options='{"title":"中文"}'>
+
+9. <y-modal params='{title:"中文"}'></y-modal>
+
+10.<input placeholder="中文">
+
+11.<y-checkbox params='{label:"中文"}'></y-checkbox>
+
+12.<ko-export-excel-frontend params = "filename: '超市订单报表' +  new Date().format('yyyy-MM-dd'),exportText: '导出Excel', exportData: $root.exportData, disabled: excelDisable"></ko-export-excel-frontend>
+
+13.<y-modal params="{textOk:'中文'}"></y-modal>
+
+## ko自定义Tag属性params需要翻译的中文属性一般为 title,其他根据传入组件属性自己定义

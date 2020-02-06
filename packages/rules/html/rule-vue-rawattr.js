@@ -6,7 +6,11 @@
  * @param {*} node 
  */
 // <group :title="cb.template.lang('xxxid'/*123*/)" class="form-group"></group>
-var rule = attr => {
-
+var rule = node => {
+  if (node.attributes) {
+    node.attributes.forEach(v => {
+      debugger
+    })
+  }
 }
 export default rule

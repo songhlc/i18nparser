@@ -6,3 +6,7 @@
  * @param {*} node 
  */
 // {{cb.template.lang('xxxid'/*中文*/)}}
+var rule = node => {
+  debugger
+}
+export default rule

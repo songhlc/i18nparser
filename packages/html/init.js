@@ -14,7 +14,7 @@ var isInScript = false
  *  leave: Function
  * } option 
  */
-function init (input, options) {
+function init (input, options = {}) {
   const ast = html.parse(input);
   const { tagRule, scriptRule, textRule, leave } = options
   html.walk(ast, {
@@ -23,14 +23,17 @@ function init (input, options) {
         if (node.name == "script") {
           isInScript = true
         }
-        // 默认规则
-        tagrules.forEach(rule => {
-          rule(node)
-        })
-        // 自定义规则
-        tagRule && tagRule.forEach(rule => {
-          rule(node)
-        })
+        // node.open.value是tag的string值
+        if (needtraslate(node?.open?.value)) {
+          // 默认规则
+          tagrules.forEach(rule => {
+            rule(node)
+          })
+          // 自定义规则
+          tagRule && tagRule.forEach(rule => {
+            rule(node)
+          })
+        }
       } else {
         // html中解析内部js
         if (isInScript) {

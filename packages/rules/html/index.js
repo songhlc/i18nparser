@@ -1,4 +1,2 @@
 import vue from './rule-vue'
-export {
-  vue
-}
+export default vue

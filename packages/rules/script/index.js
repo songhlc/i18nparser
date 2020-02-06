@@ -4,9 +4,11 @@
  * @param {*} node 
  */
 import * as recast from "recast"
+import chooseRule from './chooseRule'
 var rule = input => {
-  var ast = recast.parse(expression)
-  ast.visit({
+  var ast = recast.parse(input)
+  debugger
+  recast.visit(ast, {
     // visitStatement
     visitStatement: function (path) {
       // BinaryExpression  'a'+'b'
@@ -29,6 +31,9 @@ var rule = input => {
       // 判断参数里是否包含call和literal
       var output = recast.print(node).code
       console.log('visitExpressionStatement:', output);
+      chooseRule(node.expression)
+      
+      // if (node.expression.type =)
       debugger
       node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
         // 如果是字符型

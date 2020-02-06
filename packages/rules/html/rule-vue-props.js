@@ -7,11 +7,13 @@
  */
 // <group :title="cb.template.lang('xxxid'/*123*/)" class="form-group"></group>
 import { needtranslate, isVueBindAttr, TRANSLATE_METHOD } from '../../utils'
+import scriptrule from '../script'
 var rule = node => {
   if (node.attributes) {
     node.attributes.forEach(v => {
       if (isVueBindAttr(v.name?.value) && !v.value?._translated && needtranslate(v.value?.value)) {
-        debugger
+        var convertString = scriptrule(v.value?.value)
+        v.value._translated = true
         // && 
         // v.name.value = ':' + v.name.value
         // var quote = v.value.quote == '"' ? "'" : '"'

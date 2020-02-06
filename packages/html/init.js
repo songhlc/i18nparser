@@ -1,7 +1,7 @@
 import ast2string from './ast2string'
 import * as html from 'html5parser'
 import * as recast from "recast"
-import { needtraslate } from '../utils'
+import { needtranslate } from '../utils'
 import { scriptrules, tagrules, textrules } from './rules'
 var isInScript = false
 /**
@@ -24,7 +24,7 @@ function init (input, options = {}) {
           isInScript = true
         }
         // node.open.value是tag的string值
-        if (needtraslate(node?.open?.value)) {
+        if (needtranslate(node?.open?.value)) {
           // 默认规则
           tagrules.forEach(rule => {
             rule(node)
@@ -50,7 +50,7 @@ function init (input, options = {}) {
           const output = recast.print(jsast).code;
           node.value = output
         }
-        if (needtraslate(node?.value)) {
+        if (needtranslate(node?.value)) {
           textrules.forEach(rule => {
             rule(node)
           })

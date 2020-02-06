@@ -8,7 +8,7 @@ const {
   assignmentExpression,
   arrowFunctionExpression
 } = recast.types.builders
-import needtranslate from '../packages/utils/needtraslate'
+import needtranslate from '../packages/utils/needtranslate'
 // var input = `
 //   a(cb.t('xxx-id'))
 //   a("这是个什么问题")

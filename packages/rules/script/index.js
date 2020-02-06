@@ -32,7 +32,7 @@ var rule = input => {
       var output = recast.print(node).code
       console.log('visitExpressionStatement:', output);
       chooseRule(node.expression)
-      
+      debugger
       // if (node.expression.type =)
       debugger
       node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
@@ -46,5 +46,6 @@ var rule = input => {
       return false
     }
   })
+  return recast.print(ast).output
 }
 export default rule

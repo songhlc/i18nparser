@@ -46,6 +46,7 @@ a = {
 h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
+input = `cb.lang.template("needtranslate"/*中文字*/)`
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
  * 
@@ -56,6 +57,7 @@ function generateCallExpression (resid) {
   // var expression = `cb.lang.template("${ resid }")`
   // var ast = recast.parse(expression)
   // expressionStatement 会在末尾添加分号“；”，改成直接用callExpression
+  debugger
   var d = callExpression(
     memberExpression(
       memberExpression(id('cb'), id('lang')),

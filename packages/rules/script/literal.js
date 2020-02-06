@@ -1,7 +1,8 @@
-import { needtranslate, isVueBindAttr, TRANSLATE_METHOD, getResourceId } from '../../utils'
-var rule = Literal => {
+import { needtranslate, getResourceId, generateCallExpression } from '../../utils'
+var rule = (Literal, parentNode, attrKey) => {
   if (needtranslate(Literal.value)) {
-    Literal.value = "xxxasdfasdfjlkjsadf";
+    if (parentNode && attrKey)
+      parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value))
   }
 }
 export default rule

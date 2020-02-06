@@ -7,7 +7,6 @@ import * as recast from "recast"
 import chooseRule from './chooseRule'
 var rule = input => {
   var ast = recast.parse(input)
-  debugger
   recast.visit(ast, {
     // visitStatement
     visitStatement: function (path) {
@@ -15,7 +14,6 @@ var rule = input => {
       var { node } = path
       var output = recast.print(node).code
       console.log('visitStatement:', output)
-      debugger
       return false
     },
     // 便利属性定义 var b = 'test'
@@ -23,7 +21,6 @@ var rule = input => {
       var { node } = path
       var output = recast.print(node).code
       console.log('visitIdentifier:', output)
-      debugger
       return false
     },
     visitExpressionStatement: function (path) {
@@ -34,18 +31,18 @@ var rule = input => {
       chooseRule(node.expression)
       debugger
       // if (node.expression.type =)
-      debugger
-      node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
-        // 如果是字符型
-        if (arg.type === "Literal") {
-          if (needtranslate(arg.value)) {
-            node.expression.arguments[index] = generateCallExpression('xxx-id')
-          }
-        }
-      })
+      // node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
+      //   // 如果是字符型
+      //   if (arg.type === "Literal") {
+      //     if (needtranslate(arg.value)) {
+      //       node.expression.arguments[index] = generateCallExpression('xxx-id')
+      //     }
+      //   }
+      // })
       return false
     }
   })
-  return recast.print(ast).output
+  debugger
+  return recast.print(ast).code
 }
 export default rule

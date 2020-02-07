@@ -54,8 +54,10 @@ function init (input, options = {}) {
           textrules.forEach(rule => {
             rule(node)
           })
+          debugger
           // 自定义规则
           textRule && textRule.forEach(rule => {
+            debugger
             rule(node)
           })
         }

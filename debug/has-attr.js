@@ -26,14 +26,17 @@ var rule = (attr,outerNode) => {
                 str += ele.value
             }
             if(startIndex == 0){//data-bind里面没有attr
-                for(let i = startIndex; i < array.length; i++){
-                    str += v.value 
-                }
-                str += ","//逗号隔开
+                // for(let i = startIndex; i < array.length; i++){
+                //     let ele = array[i]
+                //     // str += ele.value
+                // }
+                // str += ","//逗号隔开
                 //node.nativeAttrs格式['placeholer:xxx',title:'xxx',xxx:'xxx']数组
+                str = str.slice(0,-1) + ','
                 outerNode.nativeAttrs.forEach(item => {
                     str += item
                 })
+                str += '}'
             }else{
                 let reduceNum = 0;
                 for(let i = startIndex; i < array.length; i++){
@@ -53,19 +56,17 @@ var rule = (attr,outerNode) => {
                     }
                 }
                 let attrValueStr = attrStr.slice(1,-1)//去掉前后括号
-                debugger
                 outerNode.nativeAttrs.forEach(item => {
                     attrValueStr += `,${item}`
                 })
                 str += '{' + attrValueStr + '}'
             }
-            if(endIndex < array.length - 1){
+            if(startIndex > 0 &&  endIndex < array.length - 1){
                 for(let i = endIndex+1; i < array.length; i++){
                     let ele = array[i]
                     str += ele.value
                 }
             }
-            debugger
             var output = recast.print(node).code
             console.log('visitStatement:', output)
             return false

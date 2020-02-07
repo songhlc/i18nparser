@@ -1,7 +1,6 @@
 
 
 let koAttrReast = function(dataBindValue,node,strReturn){
-    debugger
     let varStr = "var a = "//拼凑为reast可识别的结构
     let value = dataBindValue.value.value
     if(value.trim()[0] === "{"){//data-bind="text:xxx,html:xxx" => data-bind="{text:xxx,html:xxx}"

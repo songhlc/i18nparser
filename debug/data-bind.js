@@ -13,7 +13,6 @@ var rule = (attr,node) => {
         visitStatement: function (path) {
             // BinaryExpression  'a'+'b'
             var { node } = path
-            debugger
             node.loc.tokens.forEach(v => {
                 if(needtranslate(v.value)){
                     let quote = attr.value.quote === "'"? '"':"'"

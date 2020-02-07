@@ -22,6 +22,7 @@ var init = function (input) {
   })
   var htmlAst = htmlinit(ast2string(templateNode), { tagRule: vueTagRule, textRule: vueTextRule })
   var scriptAst = scriptinit(scriptNode[0].body[0].value)
+  debugger
   console.log(ast2string(htmlAst))
   console.log(scriptAst)
   // console.log(ast2string(styleNode))

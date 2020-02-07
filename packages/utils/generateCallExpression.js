@@ -7,10 +7,11 @@ const {
   commentBlock
 } = recast.types.builders
 // 传入资源id 生成：cb.lang.template("${ resid }")格式的语法
-export default function generateCallExpression (resid, originText) {
+export default function generateCallExpression (resid, originText, quote = '"') {
   // 文本添加注释
   var text = literal(resid)
-  debugger
+  quote = quote == '"' ? "'" : '"'
+  text.raw = quote + resid + quote
   var comment = commentBlock(originText, false, true)
   text.comments = [comment]
   // 生成cb.lang.template('text'/* text */)的形式

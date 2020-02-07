@@ -47,14 +47,8 @@ h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
 input = `
-/**
- * Block1
-*/
-/*
- * Block2
-*/
-// Line
-/* Block */
+cb('test');
+cb("test2")
 `
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
@@ -101,4 +95,8 @@ recast.visit(jsast, {
 });
 debugger
 const output = recast.print(jsast).code
-console.log(output)
+var input2 = `
+{"callee":{"object":{"object":{"name":"cb","loc":null,"type":"Identifier","comments":null,"optional":false,"typeAnnotation":null},"property":{"name":"lang","loc":null,"type":"Identifier","comments":null,"optional":false,"typeAnnotation":null},"computed":false,"loc":null,"type":"MemberExpression","comments":null},"property":{"name":"template","loc":null,"type":"Identifier","comments":null,"optional":false,"typeAnnotation":null},"computed":false,"loc":null,"type":"MemberExpression","comments":null},"arguments":[{"value":"redId0.2482171841320504","loc":null,"type":"Literal","comments":[{"value":"请填写物资名称及数量，详细的规格型号或其他补充说明（最多可输入400字）","leading":false,"trailing":true,"loc":null,"type":"CommentBlock"}],"regex":null,"raw":"'redId0.2482171841320504'"}],"loc":null,"type":"CallExpression","comments":null,"typeArguments":null}
+`
+var output2 = recast.print(input2).code
+console.log(output2)

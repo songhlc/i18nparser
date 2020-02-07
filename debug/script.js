@@ -47,8 +47,16 @@ h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
 input = `
-cb('test');
-cb("test2")
+export default {
+  name:'AddSubmit',
+  directives: {
+        TransferDom
+  },
+  components:{
+    TransferDom, XDialog, Group, XInput, XTextarea, XButton, Flexbox, FlexboxItem,Toast,
+    Disclaimer
+  }
+}
 `
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
@@ -57,8 +65,14 @@ cb("test2")
  * */
 // 
 var jsast = recast.parse(input)
+debugger
 // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
 recast.visit(jsast, {
+  visitExportDefaultDeclaration: function (path) {
+    var { node } = path
+    debugger
+    return false
+  },
   // visitStatement
   visitStatement: function (path) {
     // BinaryExpression  'a'+'b'

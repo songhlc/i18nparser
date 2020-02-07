@@ -1,2 +1,5 @@
-import vue from './rule-vue'
-export default vue
+import vuerules from './rule-vue'
+export default {
+  vueTagRule: vuerules.vueTagRule,
+  vueTextRule: vuerules.vueTextRule
+}

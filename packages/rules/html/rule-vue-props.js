@@ -14,6 +14,7 @@ var rule = node => {
   if (node.attributes) {
     node.attributes.forEach(v => {
       if (isVueBindAttr(v.name?.value) && !v.value?._translated && needtranslate(v.value?.value)) {
+        debugger
         var convertString = scriptrule(v.value?.value)
         v.value._translated = true
         var doubleQuoteIndex = convertString.indexOf(DOUBLEQUOTE)

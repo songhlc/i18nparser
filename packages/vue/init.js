@@ -20,9 +20,9 @@ var init = function (input) {
   styleNode = ast.filter(node => {
     return node.name == "style"
   })
-  // var htmlAst = htmlinit(ast2string(templateNode), { tagRule: vueTagRule, textRule: vueTextRule })
+  var htmlAst = htmlinit(ast2string(templateNode), { tagRule: vueTagRule, textRule: vueTextRule })
   var scriptAst = scriptinit(scriptNode[0].body[0].value)
-  // console.log(ast2string(htmlAst))
+  console.log(ast2string(htmlAst))
   console.log(scriptAst)
   // console.log(ast2string(styleNode))
 }

@@ -4,6 +4,7 @@ import ObjectExpression from './ObjectExpression'
 import ArrayExpression from './ArrayExpression'
 import FunctionExpression from './FunctionExpression'
 import BlockStatement from './BlockStatement'
+import ExpressionStatement from './ExpressionStatement'
 var chooseRule = (expression, parentNode, attrKey) => {
   switch (expression.type) {
     case 'LogicalExpression': logicalExpression(expression); break; // a || b
@@ -14,9 +15,9 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'FunctionExpression': FunctionExpression(expression.body); break; // function () {}
     case 'BlockStatement': BlockStatement(expression.body); break; // return {xxxxx};
     case 'ReturnStatement': chooseRule(expression.argument); break; // 同上
-    case 'IfStatement': ;
-    case 'CallExpression': ;
-    case 'ExpressionStatement': ;
+    case 'ExpressionStatement': ExpressionStatement(expression); break; // this.xx = 'test'
+    case 'IfStatement': ; // if (a == "中文")
+    case 'CallExpression': ; // cb("a", "中文")
     default: console.log("notexist:" + expression.type);
   }
 }

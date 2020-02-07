@@ -1,5 +1,5 @@
 import chooseRule from './chooseRule'
-var rule = (expression) => {
-
+var rule = (expressionStatement) => {
+  chooseRule(expressionStatement.expression)
 }
 export default rule

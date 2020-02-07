@@ -8,7 +8,7 @@ const {
   assignmentExpression,
   arrowFunctionExpression
 } = recast.types.builders
-import needtranslate from '../packages/utils/needtranslate'
+import { needtranslate, generateCallExpression } from '../packages/utils'
 // var input = `
 //   a(cb.t('xxx-id'))
 //   a("这是个什么问题")
@@ -46,27 +46,22 @@ a = {
 h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
-input = `cb.lang.template("needtranslate"/*中文字*/)`
+input = `
+/**
+ * Block1
+*/
+/*
+ * Block2
+*/
+// Line
+/* Block */
+`
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
  * 
  * 
  * */
 // 
-function generateCallExpression (resid) {
-  // var expression = `cb.lang.template("${ resid }")`
-  // var ast = recast.parse(expression)
-  // expressionStatement 会在末尾添加分号“；”，改成直接用callExpression
-  debugger
-  var d = callExpression(
-    memberExpression(
-      memberExpression(id('cb'), id('lang')),
-      id('template')
-    ),
-    [literal(resid)]
-  )
-  return d
-}
 var jsast = recast.parse(input)
 // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
 recast.visit(jsast, {

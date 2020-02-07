@@ -4,20 +4,22 @@ const {
   callExpression,
   literal,
   memberExpression,
-
+  commentBlock
 } = recast.types.builders
 // 传入资源id 生成：cb.lang.template("${ resid }")格式的语法
-export default function generateCallExpression (resid) {
-  // var expression = `cb.lang.template("${ resid }")`
-  // var ast = recast.parse(expression)
-  // expressionStatement 会在末尾添加分号“；”，改成直接用callExpression
+export default function generateCallExpression (resid, originText) {
+  // 文本添加注释
+  var text = literal(resid)
   debugger
-  var d = callExpression(
+  var comment = commentBlock(originText, false, true)
+  text.comments = [comment]
+  // 生成cb.lang.template('text'/* text */)的形式
+  var expression = callExpression(
     memberExpression(
       memberExpression(id('cb'), id('lang')),
       id('template')
     ),
-    [literal(resid)]
+    [text]
   )
-  return d
+  return expression
 }

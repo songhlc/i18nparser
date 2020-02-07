@@ -29,7 +29,6 @@ var rule = input => {
       var output = recast.print(node).code
       console.log('visitExpressionStatement:', output);
       chooseRule(node.expression)
-      debugger
       // if (node.expression.type =)
       // node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
       //   // 如果是字符型
@@ -42,7 +41,6 @@ var rule = input => {
       return false
     }
   })
-  debugger
   return recast.print(ast).code
 }
 export default rule

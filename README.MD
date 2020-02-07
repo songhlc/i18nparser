@@ -22,6 +22,7 @@
 1.<div>中文</div> => <div data-bind="text:cb.template('xxx')"></div>  还是 
 <div><!-- ko text: cb.lang.tempalte('xxx')--><!-- /ko --></div>
 
+<div title="中文"></div>
 2.<div data-bind="title:'中文'"></div> <input data-bind="attr:{placeholder:'中文'}"></input>
 
 3.<div :param="{a:'中文', b:'中文2'}">
@@ -35,7 +36,8 @@
 
 7.<div data-bind="attr:{title:'中文'}"></div>
 
-8. <div options='{"title":"中文"}'>
+
+8. <div options='{"title":"中文"}'> 
 
 9. <y-modal params='{title:"中文"}'></y-modal>
 
@@ -43,8 +45,36 @@
 
 11.<y-checkbox params='{label:"中文"}'></y-checkbox>
 
+
 12.<ko-export-excel-frontend params = "filename: '超市订单报表' +  new Date().format('yyyy-MM-dd'),exportText: '导出Excel', exportData: $root.exportData, disabled: excelDisable"></ko-export-excel-frontend>
 
 13.<y-modal params="{textOk:'中文'}"></y-modal>
 
 ## ko自定义Tag属性params需要翻译的中文属性一般为 title,其他根据传入组件属性自己定义
+
+
+
+##  ko-html规则汇总
+
+
+1. 纯文本节点 
+## 例子
+## <div>中文</div>
+## 结果
+<div>中文</div> => 
+<div><!-- ko text: cb.lang.tempalte('xxx/*中文*/')--><!-- /ko --></div>
+
+node => {
+    node.value = `<!-- ko text: cb.lang.tempalte('xxx/*${node.value}*/')--><!-- /ko -->`
+}
+
+2.属性节点为纯文本 （ko中没有对应的方法，属性只能放到attr中）
+
+例子
+## <div title="中文"></div> 
+## <input placeholder="中文" title="中国"/>
+结果
+<input placeholder="中文" /> =>
+<intput data-bind="attr:{placeholder:cb.lang.tempalte('xxx/*我爱*/'),title:cb.lang.tempalte('xxx/*中国*/')}">
+
+3.属性节点value,options

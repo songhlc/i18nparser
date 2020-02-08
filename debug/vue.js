@@ -183,5 +183,6 @@ export default {
 <style>
 
 </style>`;
-init(input)
+var result = init(input)
+console.log(result)
 

@@ -27,11 +27,14 @@ function init (input, options = {}) {
         if (needtranslate(node?.open?.value)) {
           // 默认规则
           tagrules.forEach(rule => {
-            rule(node)
+            if (!node._translated) {
+              rule(node)
+            }
           })
           // 自定义规则
           tagRule && tagRule.forEach(rule => {
-            rule(node)
+            if (!node._translated)
+              rule(node)
           })
         }
       } else {
@@ -52,11 +55,13 @@ function init (input, options = {}) {
         }
         if (needtranslate(node?.value)) {
           textrules.forEach(rule => {
-            rule(node)
+            if (!node._translated)
+              rule(node)
           })
           // 自定义规则
           textRule && textRule.forEach(rule => {
-            rule(node)
+            if (!node._translated)
+              rule(node)
           })
         }
       }

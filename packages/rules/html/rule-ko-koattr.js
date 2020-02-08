@@ -10,8 +10,8 @@ const rule = node => {
             return false
           }
         })
-        dataBindAttr.nativeAttrs = node.nativeAttrs
         if(hasDataBind){
+          dataBindAttr.nativeAttrs = node.nativeAttrs
           dataBindAttr.value.value = koAttrReast(dataBindAttr)
         }else{
           let attrs = node.nativeAttrs
@@ -26,6 +26,11 @@ const rule = node => {
               name:{value:"data-bind"}
             }
           )
+          node.attributes.forEach(v => {
+            if(v?.name.value === "data-bind"  && needtranslate(v.value?.value)){
+                v.value.value = koAttrReast(v)
+            }
+          })
         }
       }
       node.attributes.forEach(v => {

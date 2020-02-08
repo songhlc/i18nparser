@@ -2,13 +2,10 @@ import * as html from 'html5parser'
 import { init, ast2string } from '../packages/html'
 import rules from '../packages/rules/html'
 // import { needtranslate, koAttrReast } from '../packages/utils'
-import scriptinit from '../packages/rules/script'
-import dataBind from './data-bind'
-import hasAttr from './has-attr'
 const { koTagRule, koTextRule } = rules
 
 const input = `
-            <div data-bind="text:'美国'" title="只能故宫">胜多负少</div>
+            <div title="只能故宫">胜多负少</div>
     `;
  
     // const input = `

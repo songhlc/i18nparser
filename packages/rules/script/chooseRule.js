@@ -20,12 +20,13 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'CallExpression': CallExpression(expression); break;// cb("a", "中文")
     case 'IfStatement': ; // if (a == "中文")
     case 'VariableDeclarator':
-      switch(expression.init.type){
-        case 'ObjectExpression':
-          ObjectExpression(expression.init);
-          break;
+      debugger
+      // switch(expression.init.type){
+      //   case 'ObjectExpression':
+      //     ObjectExpression(expression.init);
+      //     break;
 
-      }
+      // }
       // ObjectExpression(expression.init); // var a 不处理
     default: console.log("notexist:" + expression.type);
   }

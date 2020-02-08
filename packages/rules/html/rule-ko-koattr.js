@@ -1,6 +1,5 @@
 import { needtranslate,koAttrReast } from '../../utils'
 const rule = node => {
-  debugger
     /**
      * 首先，判断是否有原生属性
      *    有原生属-->

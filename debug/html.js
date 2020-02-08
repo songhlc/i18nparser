@@ -5,44 +5,9 @@ import rules from '../packages/rules/html'
 const { koTagRule, koTextRule } = rules
 
 const input = `
-<style type="text/css">
-.floatLeft{
-    float: left;
-}
-</style>
-<div class="ibox" id="inventorycheck">
+<!-- ko foreach: {data: $root.fceditData, as: 'row'} -->
 
-<y-boxfilter params="title: '供应商入库单核对情况'">
-</y-boxfilter>
-<y-boxcontent params="style:{minHeight:'200px',marginBottom:'120px'}">
-    <div class="row">
-        <y-form params="labelWidth:'80px'">
-            <div style="width: 360px;" class="col-md-4">
-                <div class="floatLeft" style="width:150px;">
-                    <y-datepicker params='placeholder:"开始日期", data: $root.begindate'></y-datepicker>
-                </div>
-                <div class="floatLeft" style="line-height: 32px;margin: 0 5px;">至</div>
-                <div class="floatLeft" style="width:150px;">
-                    <y-datepicker params='placeholder:"结束日期", data: $root.enddate'></y-datepicker>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <y-formitem params="label:'组织多选', style:{height:'auto'}">
-                    <y-refer-org params="multiple:true,selectedRows:$root.orgs,selectedId:ko.observableArray([]),onOk:$root.selectOrgOnOk"></y-refer-org>
-                </y-formitem>
-            </div>
-            <div class="col-md-3"  style="width:350px;">
-                <y-formitem params="label:'供应商单选'">
-                    <y-refer-supply params="value: $root.supplyselectedValue">
-                    </y-refer-supply>
-                </y-formitem>
-            </div>
-            <button class="btn btn-primary" data-bind="click:$root.queryData">查询</button>
-        </y-form>
-    </div>
-    <y-grid params="minheight:'484px',maxheight:'auto',onPageChange:$root.onPageChange,onSizeChange:$root.onSizeChange,isStripe: true,columns:$root.columns,rows: $root.rows,pagination:true,totalCount: $root.totalCount,pageSize:$root.pageSize,pageIndex:$root.pageIndex"></y-grid>
-</y-boxcontent>
-</div>
+<!-- /ko -->
     `;
  
     // const input = `

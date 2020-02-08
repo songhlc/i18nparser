@@ -24,6 +24,9 @@ var rule = (input) => {
       if (needtranslate(output)) {
         console.log('visitStatement:', output)
       }
+      node.declarations.forEach(declaration => {
+        chooseRule(declaration)
+      })
       return false
     },
     // 便利属性定义 var b = 'test'

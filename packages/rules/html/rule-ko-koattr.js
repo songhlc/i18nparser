@@ -1,6 +1,4 @@
 import { needtranslate,koAttrReast } from '../../utils'
-import hasAttr from '../../../debug/has-attr'
-import dataBind from '../../../debug/data-bind'
 const rule = node => {
     if(Array.isArray(node.nativeAttrs)){
         let dataBindAttr = null
@@ -12,8 +10,9 @@ const rule = node => {
             return false
           }
         })
+        dataBindAttr.nativeAttrs = node.nativeAttrs
         if(hasDataBind){
-            koAttrReast(dataBindAttr,node,hasAttr)
+          dataBindAttr.value.value = koAttrReast(dataBindAttr)
         }else{
           let attrs = node.nativeAttrs
           let value = "attr:{"
@@ -30,10 +29,9 @@ const rule = node => {
         }
       }
       node.attributes.forEach(v => {
-        if((v?.name?.value === "data-bind"|| v?.name.value === "params" || v?.name.value === "options") && needtranslate(v.value?.value)){
-            koAttrReast(v,node,dataBind)
+        if((v?.name.value === "params" || v?.name.value === "options") && needtranslate(v.value?.value)){
+            v.value.value = koAttrReast(v)
         }
-
       })
 }
 export default rule

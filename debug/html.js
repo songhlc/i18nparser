@@ -8,7 +8,7 @@ import hasAttr from './has-attr'
 const { koTagRule, koTextRule } = rules
 
 const input = `
-            <div data-bind="text:'中国'"></div>
+            <div data-bind="text:'美国'" title="只能故宫">胜多负少</div>
     `;
  
     // const input = `
@@ -86,7 +86,6 @@ const input = `
 //     }
 //   ]
 // })
-debugger
 var ast = init(input,{
   tagRule:koTagRule,
   textRule:koTextRule

@@ -22,11 +22,9 @@ var rule = (input) => {
       var { node } = path
       var output = recast.print(node).code
       if (needtranslate(output)) {
-        console.log('visitStatement:', output)
+        // console.log('visitStatement:', output)
       }
-      node.declarations.forEach(declaration => {
-        chooseRule(declaration)
-      })
+      chooseRule(node)
       return false
     },
     // 便利属性定义 var b = 'test'
@@ -43,7 +41,7 @@ var rule = (input) => {
       // 判断参数里是否包含call和literal
       var output = recast.print(node).code
       if (needtranslate(output)) {
-        console.log('visitExpressionStatement:', output)
+        // console.log('visitExpressionStatement:', output)
       }
       chooseRule(node.expression, null, null)
       // if (node.expression.type =)

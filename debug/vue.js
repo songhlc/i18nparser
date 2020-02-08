@@ -48,7 +48,7 @@ var input = `<template>
                     v-model="phone"
                     placeholder="请输入真实联系电话"
                     class="form-input"
-                    @on-change="setIconType(phone,'phoneIcon')"
+                    @on-change="setIconType(phone,'phoneIcon', '中文')"
                     :icon-type="phoneIcon"
                     novalidate
                     type="number"

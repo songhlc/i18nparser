@@ -6,7 +6,7 @@
  * @param {*} node 
  */
 // <group :title="cb.template.lang('xxxid'/*123*/)" class="form-group"></group>
-import { needtranslate, isVueBindAttr, TRANSLATE_METHOD, getResourceId } from '../../utils'
+import { needtranslate, isVueBindAttr, TRANSLATE_METHOD, getResourceId, isVueDirective } from '../../utils'
 var rule = node => {
   if (node.attributes) {
     node.attributes.forEach(v => {

@@ -2,6 +2,8 @@ import mapDirectory from '../packages/directorymapper'
 import { init as vueinit } from '../packages/vue'
 import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
+import htmlrules from '../packages/rules/html'
+const { vueTagRule, vueTextRule } = htmlrules
 mapDirectory("./code", function (path, extendsion, fileData) {
   console.log(path, extendsion)
   switch (extendsion) {
@@ -22,6 +24,6 @@ function jsparser (path, input) {
   output(path, result)
 }
 function htmlparser (path, input) {
-  var result = htmlinit(input)
+  var result = htmlinit(input, { tagRule: vueTagRule, textRule: vueTextRule })
   output(path, ast2string(result))
 }

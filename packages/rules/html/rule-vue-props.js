@@ -19,6 +19,7 @@ var rule = node => {
         var doubleQuoteIndex = convertString.indexOf(DOUBLEQUOTE)
         var singleQuoteIndex = convertString.indexOf(SINGLEQUOTE)
         var quote = null
+        // TODO: 引号匹配规则不对
         // 如果不存在单引号或者双引号，谁小用谁
         if (doubleQuoteIndex == -1 || singleQuoteIndex == -1) {
           quote = doubleQuoteIndex > singleQuoteIndex ? SINGLEQUOTE : DOUBLEQUOTE

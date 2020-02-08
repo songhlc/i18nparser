@@ -4,6 +4,7 @@ import getResourceId from './getResourceId'
 import koAttrReast from './koAttrReast'
 import generateCallExpression from './generateCallExpression'
 import isDynamicText from './isDynamicText'
+import isVueDirective from './isVueDirective'
 const TRANSLATE_METHOD = 'cb.lang.template'
 export {
   needtranslate,
@@ -12,5 +13,6 @@ export {
   generateCallExpression,
   koAttrReast,
   TRANSLATE_METHOD,
-  isDynamicText
+  isDynamicText,
+  isVueDirective
 }

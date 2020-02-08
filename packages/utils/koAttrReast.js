@@ -31,11 +31,14 @@ let koAttrReast = function(koTagNode){
         str = str.slice(0,-1)
         //koTagNode.nativeAttrs格式['placeholer:xxx',title:'xxx',xxx:'xxx']数组
         if(koTagNode.nativeAttrs){
-            str += ","
+            str += ",attr:{"
         }
         koTagNode.nativeAttrs && koTagNode.nativeAttrs.forEach(item => {
             str += item
         })
+        if(koTagNode.nativeAttrs){
+            str += "}"
+        }
         str += '}'
     }else{
         let reduceNum = 0;

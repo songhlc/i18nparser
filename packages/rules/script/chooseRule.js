@@ -6,6 +6,7 @@ import FunctionExpression from './FunctionExpression'
 import BlockStatement from './BlockStatement'
 import ExpressionStatement from './ExpressionStatement'
 import CallExpression from './CallExpression'
+import VariableDeclaration from './VariableDeclaration'
 var chooseRule = (expression, parentNode, attrKey) => {
   switch (expression.type) {
     case 'LogicalExpression': logicalExpression(expression); break; // a || b
@@ -19,7 +20,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ExpressionStatement': ExpressionStatement(expression); break; // this.xx = 'test'
     case 'CallExpression': CallExpression(expression); break;// cb("a", "中文")
     case 'IfStatement': ; // if (a == "中文")
-    case 'VariableDeclarator':
+    case 'VariableDeclaration':VariableDeclaration(expression); break;
       debugger
       // switch(expression.init.type){
       //   case 'ObjectExpression':

@@ -1,5 +1,4 @@
-import { init } from '../packages/vue/index'
-var input = `<template>
+<template>
     <div>
         <div v-transfer-dom>
         <x-dialog
@@ -48,7 +47,7 @@ var input = `<template>
                     v-model="phone"
                     placeholder="请输入真实联系电话"
                     class="form-input"
-                    @on-change="setIconType(phone,'phoneIcon', '中文')"
+                    @on-change="setIconType(phone,'phoneIcon')"
                     :icon-type="phoneIcon"
                     novalidate
                     type="number"
@@ -182,7 +181,4 @@ export default {
 </script>
 <style>
 
-</style>`;
-var result = init(input)
-console.log(result)
-
+</style>

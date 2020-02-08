@@ -42,6 +42,16 @@
       ],
       "program": "${workspaceFolder}/debug/vue.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "mapdirectory",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/mapDirectory.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     }
   ]
 }

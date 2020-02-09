@@ -6,6 +6,7 @@ import generateCallExpression from './generateCallExpression'
 import isDynamicText from './isDynamicText'
 import isVueDirective from './isVueDirective'
 import writeFile from './writeFile'
+import wordMapping from './wordMapping'
 const TRANSLATE_METHOD = 'cb.lang.template'
 export {
   needtranslate,
@@ -16,5 +17,6 @@ export {
   TRANSLATE_METHOD,
   isDynamicText,
   isVueDirective,
-  writeFile
+  writeFile,
+  wordMapping
 }

@@ -1,5 +1,5 @@
 import mapDirectory from '../packages/directorymapper'
-import { writeFile } from '../packages/utils'
+import { writeFile, wordMapping } from '../packages/utils'
 import { init as vueinit } from '../packages/vue'
 import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
@@ -11,10 +11,11 @@ mapDirectory("./code", function (path, extendsion, fileData) {
     case 'js': jsparser(path, fileData); break;
     case 'html': htmlparser(path, fileData); break;
   }
+}, function () {
+  writeFile("coderesult/words.json", JSON.stringify(wordMapping))
 })
 function output (path, strFileData) {
   path = path.replace('code/', 'coderesult/')
-  debugger
   writeFile(path, strFileData)
 }
 function vueparser (path, input) {

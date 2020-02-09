@@ -3,7 +3,6 @@ import path from 'path'
 function mkdirPath (pathStr) {
   var projectPath = path.join(process.cwd());
   var tempDirArray = pathStr.indexOf('\\') >= 0 ? pathStr.split('\\') : pathStr.split('\/');
-  debugger
   for (var i = 0; i < tempDirArray.length - 1; i++) {
     projectPath = projectPath + '/' + tempDirArray[i];
     if (fs.existsSync(projectPath)) {

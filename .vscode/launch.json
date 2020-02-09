@@ -52,6 +52,16 @@
       ],
       "program": "${workspaceFolder}/debug/mapDirectory.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "hashtest",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/testhash.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     }
   ]
 }

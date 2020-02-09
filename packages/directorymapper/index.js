@@ -23,9 +23,13 @@ var getOtherFileSize = 0
 // 存储所给目录下的所有文件夹
 var directoryArr = []
 var callbackmapping = null
-function mapDirectory (path, cbmapping) {
+var endCallback = null
+function mapDirectory (path, cbmapping, callback) {
   if (cbmapping) {
     callbackmapping = cbmapping
+  }
+  if (callback) {
+    endCallback = callback
   }
   fs.readdir(path, function (err, files) {
     if (err) console.log(err)
@@ -69,7 +73,8 @@ function mapDirectory (path, cbmapping) {
                     }
                   } else {
                     // 结束了
-                    debugger
+                    console.log('目录遍历结束')
+                    endCallback && endCallback()
                   }
                 }
               })

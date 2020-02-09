@@ -25,6 +25,6 @@ var init = function (input) {
   var strTemplate = ast2string(templateAst)
   // script => string
   var strScript = scriptinit(scriptNode[0].body[0].value)
-  return strTemplate + "\n" + strScript
+  return strTemplate + "\n" + "<script>" + strScript + "</script>" + "\n" + ast2string(styleNode)
 }
 export default init

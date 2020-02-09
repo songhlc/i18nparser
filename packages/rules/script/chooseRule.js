@@ -19,16 +19,8 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ReturnStatement': chooseRule(expression.argument); break; // 同上
     case 'ExpressionStatement': ExpressionStatement(expression); break; // this.xx = 'test'
     case 'CallExpression': CallExpression(expression); break;// cb("a", "中文")
+    case 'VariableDeclaration': VariableDeclaration(expression); break; // var a
     case 'IfStatement': ; // if (a == "中文")
-    case 'VariableDeclaration':VariableDeclaration(expression); break;
-      debugger
-      // switch(expression.init.type){
-      //   case 'ObjectExpression':
-      //     ObjectExpression(expression.init);
-      //     break;
-
-      // }
-      // ObjectExpression(expression.init); // var a 不处理
     default: console.log("notexist:" + expression.type);
   }
 }

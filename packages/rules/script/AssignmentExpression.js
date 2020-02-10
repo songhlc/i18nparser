@@ -1,6 +1,6 @@
 import chooseRule from './chooseRule'
-var rule = (expression) => {
+var rule = (statement) => {
   // expression 分为left 和 right
-  chooseRule(expression.body)
+  chooseRule(statement.right, statement, 'right')
 }
 export default rule

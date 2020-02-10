@@ -121,15 +121,16 @@ export default {
   methods: {
     setIconType (v, icon) {
       if (v == "") {
-        this[icon] = "error"
+        this[icon] = "error" + "<div class='line25'><span>可发数量：</span>"
       } else {
         this[icon] = "success"
       }
+      this.a = this.a > 0 ? "中文" : "英文"
     },
     submit: Debounce(function () {
       //需求保存接口  
       const _this = this;
-      if (this.name == "") {
+      if (this.name == "中文") {
         this.nameIcon = "error"
         return
       }
@@ -158,12 +159,12 @@ export default {
         _this.toastMsg = "提交成功,物资信息需经平台审核通过后方可公布出来"
         _this.toastType = "success"
         console.log(res)
-      }).catch((function (err) {
+      }).catch(function (err) {
         console.log(err)
         _this.isToast = true
         _this.toastMsg = "提交失败"
         _this.toastType = "warn"
-      }))
+      })
     }, 3000),
     close () {
       this.$emit("changeShowModal", false)

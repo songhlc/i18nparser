@@ -7,6 +7,7 @@ import isDynamicText from './isDynamicText'
 import isVueDirective from './isVueDirective'
 import writeFile from './writeFile'
 import wordMapping from './wordMapping'
+import getGlobalData from './getGlobalData'
 const TRANSLATE_METHOD = 'cb.lang.template'
 export {
   needtranslate,
@@ -18,5 +19,6 @@ export {
   isDynamicText,
   isVueDirective,
   writeFile,
-  wordMapping
+  wordMapping,
+  getGlobalData
 }

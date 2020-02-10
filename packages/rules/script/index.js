@@ -5,15 +5,16 @@
  */
 import * as recast from "recast"
 import chooseRule from './chooseRule'
-import { needtranslate } from '../../utils'
-var rule = (input) => {
+import { needtranslate, getGlobalData } from '../../utils'
+var rule = (input, quote) => {
+  getGlobalData.quote = quote
   var ast = recast.parse(input)
   // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
   recast.visit(ast, {
     // vue节点 有时候直接以export default开头
     visitExportDefaultDeclaration: function (path) {
       var { node } = path
-      chooseRule(node.declaration, null, null)
+      chooseRule(node.declaration, quote, null, null)
       return false
     },
     // visitStatement
@@ -24,7 +25,7 @@ var rule = (input) => {
       if (needtranslate(output)) {
         // console.log('visitStatement:', output)
       }
-      chooseRule(node)
+      chooseRule(node, quote)
       return false
     },
     // 便利属性定义 var b = 'test'
@@ -43,19 +44,11 @@ var rule = (input) => {
       if (needtranslate(output)) {
         // console.log('visitExpressionStatement:', output)
       }
-      chooseRule(node.expression, null, null)
-      // if (node.expression.type =)
-      // node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
-      //   // 如果是字符型
-      //   if (arg.type === "Literal") {
-      //     if (needtranslate(arg.value)) {
-      //       node.expression.arguments[index] = generateCallExpression('xxx-id')
-      //     }
-      //   }
-      // })
+      chooseRule(node.expression, quote, null, null)
       return false
     }
   })
+  getGlobalData.quote = null
   return recast.print(ast).code
 }
 export default rule

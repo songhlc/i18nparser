@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <div>中文</div> -->
     <div v-transfer-dom>
       <x-dialog
         :dialog-style="{'max-width': '100%', width: '95%', 'background-color': '#FFF'}"

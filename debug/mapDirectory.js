@@ -19,8 +19,6 @@ mapDirectory(sourceDir, function (path, extendsion, fileData) {
   }
 }, function () {
   console.log(wordMapping)
-  debugger
-
   writeFile(destDir + "/words.json", JSON.stringify(wordMapping))
 })
 function output (path, strFileData) {

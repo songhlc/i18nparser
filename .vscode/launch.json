@@ -3,7 +3,9 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [{
+  "configurations": [
+
+    {
       "type": "node",
       "request": "launch",
       "name": "asttostring",
@@ -56,6 +58,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "test",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/test.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
       "name": "hashtest",
       "skipFiles": [
         "<node_internals>/**"

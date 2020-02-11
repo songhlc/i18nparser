@@ -1,4 +1,5 @@
 import { needtranslate,koAttrReast } from '../../utils'
+import * as recast from 'recast';
 const rule = node => {
     /**
      * 首先，判断是否有原生属性

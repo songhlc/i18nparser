@@ -9,6 +9,10 @@ const rule = (node) => {
         filterAttrs.push(nativeAttrs[_index])
         let quote = v.value.quote === "'"? '"':"'"
         cache.push(`${nativeAttrs[_index]}:${quote}${v.value.value}${quote}`)
+        // cache.push({
+        //   key:nativeAttrs[_index],
+        //   name:`${quote}${v.value.value}${quote}`
+        // })
         node.nativeAttrs = cache
       }
     })

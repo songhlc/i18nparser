@@ -6,10 +6,14 @@ import { init as htmlinit, ast2string } from '../packages/html'
 import htmlrules from '../packages/rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
 mapDirectory("./code", function (path, extendsion, fileData) {
-  switch (extendsion) {
-    case 'vue': vueparser(path, fileData); break;
-    case 'js': jsparser(path, fileData); break;
-    case 'html': htmlparser(path, fileData); break;
+  try {
+    switch (extendsion) {
+      case 'vue': vueparser(path, fileData); break;
+      case 'js': jsparser(path, fileData); break;
+      case 'html': htmlparser(path, fileData); break;
+    }
+  } catch (e) {
+    console.error(e)
   }
 }, function () {
   writeFile("coderesult/words.json", JSON.stringify(wordMapping))

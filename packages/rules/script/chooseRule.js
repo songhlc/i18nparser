@@ -31,7 +31,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ArrayExpression': ArrayExpression(expression); break; // [1,2,3,4]
     case 'FunctionExpression': FunctionExpression(expression); break; // function () {}
     case 'BlockStatement': BlockStatement(expression); break; // return {xxxxx};
-    case 'ReturnStatement': ReturnStatement; break;//chooseRule(expression.argument); break; // 同上
+    case 'ReturnStatement': ReturnStatement(expression); break;//chooseRule(expression.argument); break; // 同上
     case 'ExpressionStatement': ExpressionStatement(expression); break; // this.xx = 'test'
     case 'CallExpression': CallExpression(expression); break;// cb("a", "中文")
     case 'VariableDeclaration': VariableDeclaration(expression); break; // var a

@@ -24,11 +24,7 @@ function init (input, options = {}) {
           isInScript = true
         }
         if (node.name === "!--") {
-          if (/[\s]*ko[\s]+/.test(node.body[0].value)) {
-            node.body[0].whichTag = "ko"
-          } else {
-            node.body[0].whichTag = "comment"
-          }
+          node.body[0]._isComment = true
         }
         // node.open.value是tag的string值, 注释需要进行处理翻译
         if (needtranslate(node?.open?.value)) {

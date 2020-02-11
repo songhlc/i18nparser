@@ -1,48 +1,12 @@
 // 遍历目录，识别符合规则的文件
 import fs from 'fs'
-import path from 'path'
+import { isDirectoryIgnore, getExtendsion, fullPath, isFileExtensionInList } from './util'
 function readFileStr (file, callback) {
   // 这里读取当前文件全部内容，用来判断该文件的内容是否为空，如果为空的话lineReader.eachLine不会执行
   var str = fs.readFileSync(file).toString()
   return callback(file, str)
 }
-function getExtendsion (path) {
-  var index = path.lastIndexOf(".");
-  var suffix = path.substr(index + 1);
-  return suffix
-}
-// 给当前文件或文件夹添加完整的路径
-function fullPath (dir, files) {
-  return files.map(function (f) {
-    return path.join(dir, f)
-  })
-}
-function isFileExtensionInList (filepath, list) {
-  var flag = false
-  if (!list.length) {
-    return false
-  }
-  for (var i = 0; i < list.length; i++) {
-    if (filepath.indexOf(list[i]) > -1) {
-      flag = true
-      break
-    }
-  }
-  return flag
-}
-// 用来判断是否当前目录要被忽略掉
-function isDirectoryIgnore (directory) {
-  // 如果目录在需要忽略的目录中，则不继续翻译此目录下的内容
-  var ignoreDirectory = [] // 暂时不忽略任何目录
-  var flag = false
-  for (var i = 0; i < ignoreDirectory.length; i++) {
-    if (directory.indexOf(ignoreDirectory[i]) > -1) {
-      flag = true
-      break
-    }
-  }
-  return flag
-}
+
 var fileextensions = ['.js', '.vue', '.html']
 // 当前目录下js和html文件的总数
 var filesize = 0
@@ -59,9 +23,13 @@ var getOtherFileSize = 0
 // 存储所给目录下的所有文件夹
 var directoryArr = []
 var callbackmapping = null
-function mapDirectory (path, cbmapping) {
+var endCallback = null
+function mapDirectory (path, cbmapping, callback) {
   if (cbmapping) {
     callbackmapping = cbmapping
+  }
+  if (callback) {
+    endCallback = callback
   }
   fs.readdir(path, function (err, files) {
     if (err) console.log(err)
@@ -105,7 +73,8 @@ function mapDirectory (path, cbmapping) {
                     }
                   } else {
                     // 结束了
-                    debugger
+                    console.log('目录遍历结束')
+                    endCallback && endCallback()
                   }
                 }
               })

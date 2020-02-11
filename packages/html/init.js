@@ -23,6 +23,13 @@ function init (input, options = {}) {
         if (node.name == "script") {
           isInScript = true
         }
+        if(node.name === "!--"){
+          if(/[\s]*ko[\s]+/.test(node.body[0].value)){
+            node.body[0].whichTag = "ko"
+          }else{
+            node.body[0].whichTag = "comment"
+          }
+        }
         // node.open.value是tag的string值
         if (needtranslate(node?.open?.value)) {
           // 默认规则

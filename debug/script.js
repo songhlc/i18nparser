@@ -6,7 +6,8 @@ const {
   expressionStatement,
   memberExpression,
   assignmentExpression,
-  arrowFunctionExpression
+  arrowFunctionExpression,
+  commentBlock
 } = recast.types.builders
 import { needtranslate, generateCallExpression } from '../packages/utils'
 // var input = `
@@ -47,16 +48,8 @@ h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
 input = `
-export default {
-  name:'AddSubmit',
-  directives: {
-        TransferDom
-  },
-  components:{
-    TransferDom, XDialog, Group, XInput, XTextarea, XButton, Flexbox, FlexboxItem,Toast,
-    Disclaimer
-  }
-}
+cb.lang.template("test");
+cb.lang.template('test');
 `
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
@@ -65,7 +58,21 @@ export default {
  * */
 // 
 var jsast = recast.parse(input)
+var originText = "textme2"
+var text = literal('testme')
+var quote = "'"
+var comment = commentBlock(originText, false, true)
+text.comments = [comment]
+// 生成cb.lang.template('text'/* text */)的形式
+var expression = callExpression(
+  memberExpression(
+    memberExpression(id('cb'), id('lang')),
+    id('template')
+  ),
+  [text]
+)
 debugger
+recast.print(jsast).code
 // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
 recast.visit(jsast, {
   visitExportDefaultDeclaration: function (path) {
@@ -95,7 +102,6 @@ recast.visit(jsast, {
     // 判断参数里是否包含call和literal
     var output = recast.print(node).code
     console.log('visitExpressionStatement:', output);
-    debugger
     node.expression.arguments && node.expression.arguments.forEach((arg, index) => {
       // 如果是字符型
       if (arg.type === "Literal") {

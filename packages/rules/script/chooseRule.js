@@ -13,15 +13,23 @@ import AssignmentExpression from './AssignmentExpression'
 import MemberExpression from './MemberExpression'
 import BinaryExpression from './BinaryExpression'
 import ConditionalExpression from './ConditionalExpression'
+import SwitchStatement from './SwitchStatement'
+import SwtichCase from './SwtichCase'
 import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
   var code = print(expression).code
 
-  // if (code.indexOf('this.a > 0') >= 0) {
+  // if (code.indexOf('data () {') >= 0) {
   //   console.log(code)
   //   debugger
   // }
+  if (!expression.type) {
+    console.log(JSON.stringify(expression))
+    throw Error('expression.type should not be null')
+  }
   switch (expression.type) {
+    case 'SwitchStatement': SwitchStatement(expression); break;// switch () case
+    case 'SwitchCase': SwtichCase(expression); break;
     case 'ConditionalExpression': ConditionalExpression(expression); break; // a ? 1 : 2
     case 'BinaryExpression': BinaryExpression(expression); break;  // a == b
     case 'LogicalExpression': logicalExpression(expression); break; // a || b
@@ -39,6 +47,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'AssignmentExpression': AssignmentExpression(expression); break; // a = "test"
     case 'MemberExpression': MemberExpression(expression); break; // console.log
     case 'ThisExpression': break; // this
+    case 'BreakStatement': break;
     default: console.log("notexist:" + expression.type);
   }
 }

@@ -126,6 +126,32 @@ export default {
         this[icon] = "success"
       }
       this.a = this.a > 0 ? "中文" : "英文"
+      switch (this.type) {
+        case 5:
+          this.originatorNameText = '申请募捐人信息'
+          this.acceptNameText = '定向捐赠人信息'
+          this.materialNameText = '申请募捐物资信息'
+          this.entNameText = '捐赠人'
+          break;
+        case 7:
+          this.originatorNameText = '捐赠人信息'
+          this.acceptNameText = '受赠人信息'
+          this.materialNameText = '捐赠物资信息'
+          this.entNameText = '募捐方'
+          break;
+        case 9:
+          this.originatorNameText = '供货人信息'
+          this.acceptNameText = '采购人信息'
+          this.materialNameText = '供应物资信息'
+          this.entNameText = '需求方'
+          break;
+        case 11:
+          this.originatorNameText = '采购人信息'
+          this.acceptNameText = '供货人信息'
+          this.materialNameText = '采购物资信息'
+          this.entNameText = '需求方'
+          break;
+      }
     },
     submit: Debounce(function () {
       //需求保存接口  

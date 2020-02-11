@@ -5,7 +5,9 @@ import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
 import htmlrules from '../packages/rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
-mapDirectory("./code", function (path, extendsion, fileData) {
+const sourceDir = "/Users/windknow/git/cpu-relief/src" // "code" // 
+const destDir = "/Users/windknow/git/cpu-relief/translated" // "coderesult" // 
+mapDirectory(sourceDir, function (path, extendsion, fileData) {
   try {
     switch (extendsion) {
       case 'vue': vueparser(path, fileData); break;
@@ -16,10 +18,13 @@ mapDirectory("./code", function (path, extendsion, fileData) {
     console.error(e)
   }
 }, function () {
-  writeFile("coderesult/words.json", JSON.stringify(wordMapping))
+  console.log(wordMapping)
+  debugger
+
+  writeFile(destDir + "/words.json", JSON.stringify(wordMapping))
 })
 function output (path, strFileData) {
-  path = path.replace('code/', 'coderesult/')
+  path = path.replace(sourceDir, destDir)
   writeFile(path, strFileData)
 }
 function vueparser (path, input) {

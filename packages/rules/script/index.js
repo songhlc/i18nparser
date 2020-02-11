@@ -44,7 +44,12 @@ var rule = (input, quote) => {
       if (needtranslate(output)) {
         // console.log('visitExpressionStatement:', output)
       }
-      chooseRule(node.expression, quote, null, null)
+      try {
+        chooseRule(node.expression, quote, null, null)
+      } catch (e) {
+        debugger
+      }
+
       return false
     }
   })

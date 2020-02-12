@@ -19,7 +19,10 @@ var input = `
 <!-- 中国人 -->
 </div>
     `;
-input = `<Test :height=40></Test>`
+input = `<Test 
+  :height=40
+  test="42"
+></Test>`
 /**
  * 
  */

@@ -13,12 +13,7 @@ const DOUBLEQUOTE = '"'
 var rule = node => {
   if (node.attributes) {
     node.attributes.forEach(v => {
-
       if (isVueBindAttr(v.name?.value) && !v.value?._translated) {
-        if (!v.value.quote) {
-          debugger
-          v.value.quote = '"'
-        }
         if (needtranslate(v.value?.value)) {
           // 可能会出现纯字符串，非正规js语句 转成 var aaa = 之后再替换掉
           var text = v.value?.value

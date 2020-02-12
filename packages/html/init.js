@@ -26,12 +26,6 @@ function init (input, options = {}) {
         if (node.name === "!--") {
           node.body[0]._isComment = true
         }
-        // 如果Tag属性没有quote则要补充上
-        node.attributes && node.attributes.forEach(attr => {
-          if (!attr.value.quote) {
-            attr.value.quote = '"'
-          }
-        })
         // node.open.value是tag的string值, 注释需要进行处理翻译
         if (needtranslate(node?.open?.value)) {
           // 默认规则

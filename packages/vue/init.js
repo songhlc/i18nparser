@@ -3,7 +3,7 @@
 import { init as htmlinit, ast2string } from '../html'
 import htmlrules from '../rules/html'
 import scriptinit from '../rules/script'
-import * as html from 'html5parser'
+import * as html from 'html5parser-fork'
 const { vueTagRule, vueTextRule } = htmlrules
 var init = function (input) {
   const ast = html.parse(input);

@@ -1,4 +1,4 @@
-import * as html from 'html5parser'
+import * as html from 'html5parser-fork'
 import { init, ast2string } from '../packages/html'
 import rules from '../packages/rules/html'
 // import { needtranslate, koAttrReast } from '../packages/utils'
@@ -19,7 +19,7 @@ var input = `
 <!-- 中国人 -->
 </div>
     `;
-input = `<Test></Test>`
+input = `<Test :height=40></Test>`
 /**
  * 
  */

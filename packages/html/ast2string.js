@@ -1,4 +1,4 @@
-import * as html from 'html5parser'
+import * as html from 'html5parser-fork'
 function ast2String (ast, text) {
   if (!text) {
     text = ''

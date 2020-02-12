@@ -5,7 +5,7 @@ import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
 import htmlrules from '../packages/rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
-const rootDir = "/Users/windknow/git/cpu-relief/" // ""
+const rootDir = "/Users/windknow/git/cpu-relief/" // "" //
 const sourceDir = rootDir + "src" // "code" // "code" //
 const destDir = rootDir + "src" // "coderesult" // "coderesult" //
 const wordDir = rootDir // "coderesult" // 

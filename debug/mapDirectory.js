@@ -5,8 +5,10 @@ import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
 import htmlrules from '../packages/rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
-const sourceDir = "/Users/windknow/git/cpu-relief/src" // "code" // 
-const destDir = "/Users/windknow/git/cpu-relief/translated" // "coderesult" // 
+const rootDir = "/Users/windknow/git/cpu-relief/" // ""
+const sourceDir = rootDir + "src" // "code" // "code" //
+const destDir = rootDir + "src" // "coderesult" // "coderesult" //
+const wordDir = rootDir // "coderesult" // 
 mapDirectory(sourceDir, function (path, extendsion, fileData) {
   try {
     switch (extendsion) {
@@ -19,7 +21,7 @@ mapDirectory(sourceDir, function (path, extendsion, fileData) {
   }
 }, function () {
   console.log(wordMapping)
-  writeFile(destDir + "/words.json", JSON.stringify(wordMapping))
+  writeFile(wordDir + "/words.json", JSON.stringify(wordMapping))
 })
 function output (path, strFileData) {
   path = path.replace(sourceDir, destDir)

@@ -58,8 +58,8 @@ var rule = node => {
       var translate = text.text
       if (needtranslate(translate)) {
         translate = scriptrule(translate)
-        translate = "{{" + translate + "}}"
       }
+      translate = "{{" + translate + "}}"
       return {
         index: text.index,
         text: translate

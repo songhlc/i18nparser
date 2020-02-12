@@ -19,6 +19,7 @@ function init (input, options = {}) {
   const { tagRule, scriptRule, textRule, leave } = options
   html.walk(ast, {
     enter: (node) => {
+      // TODO: :height=40无法识别 
       if (node.type === html.SyntaxKind.Tag) {
         if (node.name == "script") {
           isInScript = true

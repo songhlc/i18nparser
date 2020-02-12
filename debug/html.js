@@ -4,7 +4,7 @@ import rules from '../packages/rules/html'
 // import { needtranslate, koAttrReast } from '../packages/utils'
 const { koTagRule, koTextRule } = rules
 
-const input = `
+var input = `
 <div>
 <div data-bind="text:'万岁'">生命物件</div>
 <div placeholder="黄i的"></div>
@@ -19,13 +19,14 @@ const input = `
 <!-- 中国人 -->
 </div>
     `;
+input = `<Test></Test>`
 /**
  * 
  */
 
-var ast = init(input,{
-  tagRule:koTagRule,
-  textRule:koTextRule
+var ast = init(input, {
+  tagRule: koTagRule,
+  textRule: koTextRule
 })
 var result = ast2string(ast)
 console.log(result)

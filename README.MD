@@ -18,3 +18,43 @@
 
 - 1.快速rule验证推荐使用jest，通过测试用例来验证
 - 2.使用vscode debug来调试 默认html表示调试debug/html.js 详见.vscode/launch.json
+
+1.<div>中文</div> => <div data-bind="text:cb.template('xxx')"></div>  还是 
+<div><!-- ko text: cb.lang.tempalte('xxx')--><!-- /ko --></div>
+
+<div title="中文"></div>
+2.<div data-bind="title:'中文'"></div> <input data-bind="attr:{placeholder:'中文'}"></input>
+
+3.<div :param="{a:'中文', b:'中文2'}">
+
+4.<div data-bind="text:'中文'">中阿顾问</div>
+
+5.<div data-bind="{text:'中文', value:function(){return '现金'+ 'test'}}"></div> =>
+<div data-bind="{text:'中文', value:function(){return cb.lang.template('xxxid')+ 'test'}}"></div>
+
+6.<div data-bind="i18n:'xxx-id'">中文</div> =><div data-bind="">中文</div> => 转1
+
+7.<div data-bind="attr:{title:'中文'}"></div>
+
+
+8. <div options='{"title":"中文"}'> 
+
+9. <y-modal params='{title:"中文"}'></y-modal>
+
+10.<input placeholder="中文">
+
+11.<y-checkbox params='{label:"中文"}'></y-checkbox>
+
+
+12.<ko-export-excel-frontend params = "filename: '超市订单报表' +  new Date().format('yyyy-MM-dd'),exportText: '导出Excel', exportData: $root.exportData, disabled: excelDisable"></ko-export-excel-frontend>
+
+13.<y-modal params="{textOk:'中文'}"></y-modal>
+
+## ko自定义Tag属性params需要翻译的中文属性一般为 title,其他根据传入组件属性自己定义
+
+
+
+##  ko-html规则汇总
+
+
+

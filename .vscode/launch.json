@@ -4,6 +4,7 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+
     {
       "type": "node",
       "request": "launch",
@@ -22,6 +23,54 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/debug/html.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "script",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/script.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "vue",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/vue.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "mapdirectory",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/mapDirectory.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "test",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/test.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "name": "hashtest",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/testhash.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     }
   ]

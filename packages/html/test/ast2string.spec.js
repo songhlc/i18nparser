@@ -1,5 +1,5 @@
 import ast2string from '../ast2string'
-import * as html from 'html5parser'
+import * as html from 'html5parser-fork'
 
 describe('测试ast2string', () => {
   // 这是mocha的玩法，jest可以直接兼容

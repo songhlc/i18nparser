@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`测试init 测试tagRule 1`] = `
+exports[`测试init 测试tagRule 找到data-bind 添加一个自定义属性data-i18nparser 1`] = `
 " <!doctype html>
     <html>
       <body>

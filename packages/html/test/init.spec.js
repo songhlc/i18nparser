@@ -1,5 +1,5 @@
 import init from '../init'
-import * as html from 'html5parser'
+import * as html from 'html5parser-fork'
 import ast2string from '../ast2string'
 const input = ` <!doctype html>
     <html>

@@ -4,10 +4,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const analyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 var packageConfig = require('./package.json')
 module.exports = {
-  entry: './packages/index.js',
+  entry: {
+    index: './packages/index.js'
+  },
   output: {
     filename: 'index.min.js',
-    path: path.resolve(__dirname, 'lib')
+    path: path.resolve(__dirname, 'lib'),
+    library: 'i18nparser',
+    libraryTarget: 'umd',
+    globalObject: 'global',
+    umdNamedDefine: true
   },
   module: {
     rules: [
@@ -25,13 +31,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new analyzer(),
+    // new analyzer(),
     new webpack.BannerPlugin('ycloud v' + packageConfig.version + ' author by songhlc')
   ],
   externals: {
     "html5parser-fork": "html5parser-fork",
-    "fs": "fs",
-    "recast": "recast",
-    "string-hash": "string-hash",
-  }
+    "recast": "recast"
+  },
+  target: 'node'
 };

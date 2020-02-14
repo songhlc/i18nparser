@@ -15,10 +15,7 @@ import BinaryExpression from './BinaryExpression'
 import ConditionalExpression from './ConditionalExpression'
 import SwitchStatement from './SwitchStatement'
 import SwtichCase from './SwtichCase'
-import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
-  var code = print(expression).code
-
   // if (code.indexOf('data () {') >= 0) {
   //   console.log(code)
   //   debugger

@@ -16,6 +16,7 @@
     "@rollup/plugin-node-resolve": "^7.1.1",
     "html5parser-fork": "^1.1.2-beta",
     "recast": "^0.18.5",
+    "rollup-plugin-commonjs": "^10.1.0",
     "string-hash": "^1.1.3",
     "tree-sitter": "^0.16.0",
     "tree-sitter-java": "^0.16.0"

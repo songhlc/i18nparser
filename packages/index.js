@@ -1,4 +1,3 @@
-
 import path from 'path'
 import mapDirectory from './directorymapper'
 import { writeFile, wordMapping } from './utils'

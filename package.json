@@ -1,5 +1,5 @@
 {
-  "name": "i18nparser",
+  "name": "i18n-full-parser",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/songhlc/i18nparser.git",

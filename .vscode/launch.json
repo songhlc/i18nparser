@@ -75,5 +75,15 @@
       "program": "${workspaceFolder}/debug/java.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "mainVue",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/main.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    }
   ]
 }

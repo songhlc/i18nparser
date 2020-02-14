@@ -48,6 +48,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'MemberExpression': MemberExpression(expression); break; // console.log
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
+    case 'UnaryExpression': break;
     default: console.log("notexist:" + expression.type);
   }
 }

@@ -1,6 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const analyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+var packageConfig = require('./package.json')
 module.exports = {
   entry: './packages/index.js',
   output: {
@@ -23,7 +25,8 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new analyzer()
+    new analyzer(),
+    new webpack.BannerPlugin('ycloud v' + packageConfig.version + ' author by songhlc')
   ],
   externals: {
     "html5parser-fork": "html5parser-fork",

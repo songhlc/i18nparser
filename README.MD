@@ -1,6 +1,20 @@
 # i18nparser
 将前端代码解析成AST后，抽取中文词条并翻译
 
+## how to use
+ ```
+ import i18nparser from 'i18n-full-parser'
+ i18nparser.translate(configPath)({
+  type: 'vue'
+})
+ ```
+## API
+ ```
+  configPath: String (path/to/config.js). default:（./i18nparser.config.js）
+  type: String ("vue/ko/java"). set default rule for matched Node
+ ```
+
+
 ## 计划
 - 1.html
 - 2.vue
@@ -12,6 +26,7 @@
 #### 先基于ko和vue 进行翻译处理。
 #### 资源id+注释
 #### 中文 -》 cb.lang.template("YS_PUR_portal-fe_L_00053199") /* "保存成功" */
+
 
 
 ## 如何开发与调试

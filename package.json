@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "main": "lib/index.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
-  "author": "songhlc <songhlc@yonyou.com>",
+  "author": "songhlc <369585552@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "babel-node --inspect-brk packages/html/index.js",

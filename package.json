@@ -1,6 +1,6 @@
 {
   "name": "i18n-full-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib/index.min.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
   "author": "songhlc <369585552@qq.com>",
@@ -9,7 +9,7 @@
     "dev": "babel-node --inspect-brk packages/html/index.js",
     "test": "jest",
     "build": "webpack --mode none --config webpack.config.js",
-    "build:rollup": "rollup packages/index.js --file lib/index.min.js --format cjs"
+    "build:rollup": "rollup -c"
   },
   "jest": {},
   "dependencies": {

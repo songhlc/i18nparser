@@ -1,4 +1,4 @@
-import { needtranslate,koAttrReast } from '../../utils'
+import { needtranslate,koAttrReast,getGlobalData } from '../../utils'
 import * as recast from 'recast';
 const rule = node => {
     /**
@@ -18,31 +18,38 @@ const rule = node => {
           return attr.name.value === "data-bind"
         })[0]
         if(dataBindAttr){
+          getGlobalData.quote  =  dataBindAttr.value.quote
           dataBindAttr.nativeAttrs = node.nativeAttrs
           dataBindAttr.value.value = koAttrReast(dataBindAttr)
         }else{//没有data-bind
           let attrs = node.nativeAttrs
           let value = "attr:{"
           attrs.forEach(v => {
-            value += `${v},`
+            value += `${v.name}:${v.value},`
           })
           value = value.slice(0,-1)
+         
           node.attributes.push(
             {
-              value:{value:value + "}",quote:"'"},
+              value:'',
               name:{value:"data-bind"}
             }
           )
           node.attributes.forEach(v => {
-            if(v?.name.value === "data-bind"  && needtranslate(v.value?.value)){
-                v.value.value = koAttrReast(v)
+            if(v?.name.value === "data-bind"){
+              v.nativeAttrs = node.nativeAttrs
+                getGlobalData.quote  =  '"'
+                let strAttr = koAttrReast(v)
+                v.value = {value:''}
+                v.value.value = '"' + strAttr + '"'
             }
           })
         }
     }else{
       node.attributes.forEach(v => {
         if((v?.name.value === "data-bind" || v?.name.value === "params" || v?.name.value === "options") && needtranslate(v.value?.value)){
-            v.value.value = koAttrReast(v)
+          getGlobalData.quote  =  v.value.quote  
+          v.value.value = koAttrReast(v)
         }
       })
     }

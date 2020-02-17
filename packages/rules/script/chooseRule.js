@@ -15,6 +15,7 @@ import BinaryExpression from './BinaryExpression'
 import ConditionalExpression from './ConditionalExpression'
 import SwitchStatement from './SwitchStatement'
 import SwtichCase from './SwtichCase'
+import PropertyExpression from './PropertyExpression'
 import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
   var code = print(expression).code
@@ -46,6 +47,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'IfStatement': IfStatement(expression); break; // if (a == "中文")
     case 'AssignmentExpression': AssignmentExpression(expression); break; // a = "test"
     case 'MemberExpression': MemberExpression(expression); break; // console.log
+    case 'Property':PropertyExpression(expression);break;
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
     case 'UnaryExpression': break;

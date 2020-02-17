@@ -18,8 +18,6 @@ import SwtichCase from './SwtichCase'
 import PropertyExpression from './PropertyExpression'
 import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
-  var code = print(expression).code
-
   // if (code.indexOf('data () {') >= 0) {
   //   console.log(code)
   //   debugger

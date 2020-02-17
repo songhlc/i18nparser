@@ -1,25 +1,27 @@
 {
   "name": "i18n-full-parser",
-  "version": "1.0.1",
-  "main": "lib/index.js",
+  "version": "1.0.3",
+  "main": "lib/index.min.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
   "author": "songhlc <369585552@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "babel-node --inspect-brk packages/html/index.js",
     "test": "jest",
-    "build": "webpack --mode production --config webpack.config.js"
+    "build": "webpack --mode none --config webpack.config.js",
+    "build:rollup": "rollup -c"
   },
   "jest": {},
   "dependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "html5parser-fork": "^1.1.2-beta",
     "recast": "^0.18.5",
+    "rollup-plugin-commonjs": "^10.1.0",
     "string-hash": "^1.1.3",
     "tree-sitter": "^0.16.0",
     "tree-sitter-java": "^0.16.0"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/node": "^7.8.3",
@@ -28,6 +30,8 @@
     "@babel/preset-env": "^7.8.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "jest": "^24.9.0",
+    "rollup-plugin-babel": "^4.3.3",
     "webpack": "^4.41.6",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.11"

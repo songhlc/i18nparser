@@ -7,8 +7,11 @@ import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
 
-var translate = (configPath) => {
-  var config = require(configPath || path.join(__dirname, "./i18nparser.config.js"))
+var translate = (config) => {
+  if (typeof config !== 'object') {
+    thorw.Error('Error:params config should be typeof "object"!')
+    return;
+  }
   var { sourcePath, outputPath, needTranslate, type } = config
   var extractOnly = false
   function output (filepath, strFileData) {

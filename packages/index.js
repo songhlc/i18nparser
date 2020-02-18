@@ -5,7 +5,7 @@ import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
-const { vueTagRule, vueTextRule } = htmlrules
+const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 
 var translate = (config) => {
   if (typeof config !== 'object') {
@@ -33,6 +33,7 @@ var translate = (config) => {
     var result;
     switch (type) {
       case 'vue': result = htmlinit(input, { tagRule: vueTagRule, textRule: vueTextRule }); break;
+      case 'ko': result = htmlinit(input, { tagRule: koTagRule, textRule: koTextRule })
     }
     output(path, ast2string(result))
   }

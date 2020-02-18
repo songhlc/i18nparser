@@ -2,7 +2,10 @@ import { needtranslate, getResourceId, generateCallExpression, getGlobalData } f
 var rule = (Literal, parentNode, attrKey) => {
   if (needtranslate(Literal.value)) {
     if (parentNode) {
-      parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value), Literal.value, getGlobalData.quote)
+      // 非正则表达式类型才处理
+      if (!Literal.regex) {
+        parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value), Literal.value, getGlobalData.quote)
+      }
     }
   }
 }

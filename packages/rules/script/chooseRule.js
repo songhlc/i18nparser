@@ -22,7 +22,14 @@ var chooseRule = (expression, parentNode, attrKey) => {
   //   console.log(code)
   //   debugger
   // }
+  if (!expression) {
+    var code = print(parentNode).code
+    console.log(code)
+    debugger
+
+  }
   if (!expression.type) {
+    debugger
     console.log(JSON.stringify(expression))
     throw Error('expression.type should not be null')
   }
@@ -45,11 +52,11 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'IfStatement': IfStatement(expression); break; // if (a == "中文")
     case 'AssignmentExpression': AssignmentExpression(expression); break; // a = "test"
     case 'MemberExpression': MemberExpression(expression); break; // console.log
-    case 'Property':PropertyExpression(expression);break;
+    case 'Property': PropertyExpression(expression); break;
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
     case 'UnaryExpression': break;
-    default: break;//console.log("notexist:" + expression.type);
+    default: break; console.log("notexist:" + expression.type);
   }
 }
 export default chooseRule

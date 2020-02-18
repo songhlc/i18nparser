@@ -80,7 +80,7 @@ function mapDirectory (path, cbmapping, callback) {
               })
             } else {
               readFileStr(f, function (path, fileData) {
-                console.log('not Translate path:' + path)
+                // console.log('not Translate path:' + path)
               })
               // 这里处理当前目录下即没有html、js文件也没有文件夹的情况
               if (filesize == 0 && directorySize == 0) {

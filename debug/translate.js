@@ -1,4 +1,4 @@
-var i18nparser = require("./lib/index.min.js")
+import i18nparser from "../packages"
 var path = require('path')
 var config = {
   ignoreDirectory: ["/js", "/umd", "/report", "/h5", "/build", "/css", "/example", "/img"],
@@ -7,7 +7,8 @@ var config = {
   needTranslate: null,
   type: 'ko'
 }
-module.exports = config
 i18nparser.translate(config)({
-  type: 'vue'
+  extractCallback: function (data) {
+    console.log('==end==')
+  }
 })

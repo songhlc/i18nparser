@@ -16,19 +16,23 @@ import ConditionalExpression from './ConditionalExpression'
 import SwitchStatement from './SwitchStatement'
 import SwtichCase from './SwtichCase'
 import PropertyExpression from './PropertyExpression'
+import NewExpression from './NewExpression'
+import FunctionDeclaration from './FunctionDeclaration'
+import ForStatemente from './ForStatemente'
+import ForInStatement from './ForInStatement'
+import TryStatement from './TryStatement'
+import ArrowFunctionExpression from './ArrowFunctionExpression'
+import SequenceExpression from './SequenceExpression'
+import CatchClause from './CatchClause'
+import TemplateLiteral from './TemplateLiteral'
 import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
   // if (code.indexOf('data () {') >= 0) {
   //   console.log(code)
   //   debugger
   // }
+  var code = print(expression).code
   if (!expression) {
-    var code = print(parentNode).code
-    console.log(code)
-    debugger
-
-  }
-  if (!expression.type) {
     debugger
     console.log(JSON.stringify(expression))
     throw Error('expression.type should not be null')
@@ -53,10 +57,25 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'AssignmentExpression': AssignmentExpression(expression); break; // a = "test"
     case 'MemberExpression': MemberExpression(expression); break; // console.log
     case 'Property': PropertyExpression(expression); break;
+    case 'NewExpression': NewExpression(expression); break; // new XXX()
+    case 'FunctionDeclaration': FunctionDeclaration(expression); break; // function ()
+    case 'ForInStatement': ForInStatement(expression); break;
+    case 'SequenceExpression': SequenceExpression(expression); break;
+    case 'ForStatement': ForStatemente(expression); break; // for ()
+    case 'TryStatement': TryStatement(expression); break;
+    case 'ArrowFunctionExpression': ArrowFunctionExpression(expression); break;
+    case 'CatchClause': CatchClause(expression); break;
+    case 'TemplateLiteral': TemplateLiteral(expression); break;
+    case 'ThrowStatement': ;
+    case 'EmptyStatement': ;
+    case 'ContinueStatement': ;
+    case 'ContinueStatement': ;
+    case 'DebuggerStatement': ;
+    case 'UpdateExpression': break;
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
     case 'UnaryExpression': break;
-    default: break; console.log("notexist:" + expression.type);
+    default: console.log("notexist:" + expression.type + " ==" + code); break;
   }
 }
 export default chooseRule

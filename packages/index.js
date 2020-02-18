@@ -7,6 +7,7 @@ import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
 const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 
+var spinner = null
 var translate = (config) => {
   if (typeof config !== 'object') {
     thorw.Error('Error:params config should be typeof "object"!')
@@ -16,10 +17,12 @@ var translate = (config) => {
   getGlobalData.ignoreDirectory = ignoreDirectory || []
   var extractOnly = false
   function output (filepath, strFileData) {
+
     if (!extractOnly) {
       filepath = filepath.replace(sourcePath, outputPath)
       writeFile(filepath, strFileData)
     }
+    process.stdout.write("=")
   }
   function vueparser (path, input) {
     var result = vueinit(input)
@@ -38,6 +41,7 @@ var translate = (config) => {
     output(path, ast2string(result))
   }
   return function (option) {
+    process.stdout.write("[")
     extractOnly = option?.extractOnly
     if (!outputPath) {
       outputPath = sourcePath
@@ -46,18 +50,16 @@ var translate = (config) => {
       type = "vue"
     }
     mapDirectory(sourcePath, function (path, extendsion, fileData) {
-      try {
-        switch (extendsion) {
-          case 'vue': vueparser(path, fileData); break;
-          case 'js': jsparser(path, fileData); break;
-          case 'html': htmlparser(path, fileData, type); break;
-          case 'java': break;
-        }
-      } catch (e) {
-        console.error(e)
+      switch (extendsion) {
+        case 'vue': vueparser(path, fileData); break;
+        case 'js': jsparser(path, fileData); break;
+        case 'html': htmlparser(path, fileData, type); break;
+        case 'java': break;
       }
     }, function () {
-      option.extractCallback && option.extractCallback(wordMapping)
+      process.stdout.write("]")
+      process.stdout.write("done")
+      option?.extractCallback && option.extractCallback(wordMapping)
       writeFile(outputPath + "/words.json", JSON.stringify(wordMapping))
     })
   }

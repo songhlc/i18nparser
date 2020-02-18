@@ -10,9 +10,6 @@ function ast2String (ast, text) {
       if (item.name === "!--") {//<!-- ko text:xxx --><!-- /ko -->
         var value = item.body ? item.body[0].value : ""
         text += item.open.value + value + item.close.value
-      } else if (item.name === "style") {
-        // do nothing
-        text += item.value
       } else {
         text += '<' + item.name
         item.attributes && item.attributes.forEach((attr, index) => {

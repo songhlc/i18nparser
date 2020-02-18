@@ -36,6 +36,12 @@ function init (input, options = {}) {
             node.body[0]._isComment = true
           }
         }
+        // 统一处理方式
+        if (node.name === "title") {
+          if (node.body) {
+            node.body[0]._isTitle = true
+          }
+        }
         // node.open.value是tag的string值, 注释需要进行处理翻译
         if (needtranslate(node?.open?.value)) {
           // 默认规则
@@ -54,14 +60,7 @@ function init (input, options = {}) {
         // html中解析内部js
         if (isInScript) {
           var jsast;
-
-          try {
-            jsast = recast.parse(node.value);
-          } catch (e) {
-            console.log(input)
-            debugger
-          }
-
+          jsast = recast.parse(node.value);
           // 默认规则
           scriptrules.forEach(rule => {
             rule(jsast)
@@ -73,17 +72,18 @@ function init (input, options = {}) {
           // js转换后重新解析
           const output = recast.print(jsast).code;
           node.value = output
-        }
-        if (needtranslate(node?.value)) {
-          textrules.forEach(rule => {
-            if (!node._translated)
-              rule(node)
-          })
-          // 自定义规则
-          textRule && textRule.forEach(rule => {
-            if (!node._translated)
-              rule(node)
-          })
+        } else {
+          if (needtranslate(node?.value)) {
+            textrules.forEach(rule => {
+              if (!node._translated)
+                rule(node)
+            })
+            // 自定义规则
+            textRule && textRule.forEach(rule => {
+              if (!node._translated)
+                rule(node)
+            })
+          }
         }
       }
     },

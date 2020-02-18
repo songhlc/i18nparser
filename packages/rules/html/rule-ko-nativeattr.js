@@ -8,11 +8,11 @@ const rule = (node) => {
       if(_index >= 0 && needtranslate(v.value.value)){
         filterAttrs.push(nativeAttrs[_index])
         let quote = v.value.quote === "'"? '"':"'"
-        cache.push(`${nativeAttrs[_index]}:${quote}${v.value.value}${quote}`)
-        // cache.push({
-        //   key:nativeAttrs[_index],
-        //   name:`${quote}${v.value.value}${quote}`
-        // })
+        // cache.push(`${nativeAttrs[_index]}:${quote}${v.value.value}${quote}`)
+        cache.push({
+          name:nativeAttrs[_index],
+          value:v.value.value
+        })
         node.nativeAttrs = cache
       }
     })

@@ -1,6 +1,6 @@
 import path from 'path'
 import mapDirectory from './directorymapper'
-import { writeFile, wordMapping } from './utils'
+import { writeFile, wordMapping, getGlobalData } from './utils'
 import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
@@ -12,7 +12,8 @@ var translate = (config) => {
     thorw.Error('Error:params config should be typeof "object"!')
     return;
   }
-  var { sourcePath, outputPath, needTranslate, type } = config
+  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory } = config
+  getGlobalData.ignoreDirectory = ignoreDirectory || []
   var extractOnly = false
   function output (filepath, strFileData) {
     if (!extractOnly) {

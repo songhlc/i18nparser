@@ -1,4 +1,5 @@
 var globalData = {
-  quote: null
+  quote: null,
+  ignoreDirectory: []
 }
 export default globalData

@@ -49,7 +49,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
     case 'UnaryExpression': break;
-    default: console.log("notexist:" + expression.type);
+    default: break;//console.log("notexist:" + expression.type);
   }
 }
 export default chooseRule

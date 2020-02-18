@@ -28,7 +28,7 @@ function writeFile (path, stringData) {
       debugger
       throw err;
     }
-    console.log(path + ' has been saved!');
+    // console.log(path + ' has been saved!');
   })
 }
 export default writeFile

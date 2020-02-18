@@ -43,6 +43,7 @@ const rule = node => {
                 let strAttr = koAttrReast(v)
                 v.value = {value:''}
                 v.value.value = '"' + strAttr + '"'
+                getGlobalData.quote  =  null
             }
           })
         }

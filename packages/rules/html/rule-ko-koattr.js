@@ -21,6 +21,7 @@ const rule = node => {
           getGlobalData.quote  =  dataBindAttr.value.quote
           dataBindAttr.nativeAttrs = node.nativeAttrs
           dataBindAttr.value.value = koAttrReast(dataBindAttr)
+          getGlobalData.quote  =  null
         }else{//没有data-bind
           let attrs = node.nativeAttrs
           let value = "attr:{"
@@ -42,6 +43,7 @@ const rule = node => {
                 let strAttr = koAttrReast(v)
                 v.value = {value:''}
                 v.value.value = '"' + strAttr + '"'
+                getGlobalData.quote  =  null
             }
           })
         }
@@ -50,6 +52,7 @@ const rule = node => {
         if((v?.name.value === "data-bind" || v?.name.value === "params" || v?.name.value === "options") && needtranslate(v.value?.value)){
           getGlobalData.quote  =  v.value.quote  
           v.value.value = koAttrReast(v)
+          getGlobalData.quote  =  null
         }
       })
     }

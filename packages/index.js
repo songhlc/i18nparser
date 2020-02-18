@@ -1,15 +1,19 @@
 import path from 'path'
 import mapDirectory from './directorymapper'
-import { writeFile, wordMapping } from './utils'
+import { writeFile, wordMapping, getGlobalData } from './utils'
 import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
 const { vueTagRule, vueTextRule } = htmlrules
 
-var translate = (configPath) => {
-  var config = require(configPath || path.join(__dirname, "./i18nparser.config.js"))
-  var { sourcePath, outputPath, needTranslate, type } = config
+var translate = (config) => {
+  if (typeof config !== 'object') {
+    thorw.Error('Error:params config should be typeof "object"!')
+    return;
+  }
+  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory } = config
+  getGlobalData.ignoreDirectory = ignoreDirectory || []
   var extractOnly = false
   function output (filepath, strFileData) {
     if (!extractOnly) {

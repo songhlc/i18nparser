@@ -16,7 +16,13 @@ import { scriptrules, tagrules, textrules } from './rules'
  */
 function init (input, options = {}) {
   var isInScript = false
-  const ast = html.parse(input);
+  var ast;
+  try {
+    ast = html.parse(input);
+  } catch (e) {
+    debugger
+  }
+
   const { tagRule, scriptRule, textRule, leave } = options
   html.walk(ast, {
     enter: (node) => {

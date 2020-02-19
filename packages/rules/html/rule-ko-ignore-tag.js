@@ -1,6 +1,6 @@
 const rule = (node) => {
   if (node._isTitle) {
-    node._translate = true
+    node._translated = true
   }
 }
 

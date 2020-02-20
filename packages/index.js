@@ -13,8 +13,11 @@ var translate = (config) => {
     thorw.Error('Error:params config should be typeof "object"!')
     return;
   }
-  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory } = config
+  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory, resourceIdPrefix } = config
   getGlobalData.ignoreDirectory = ignoreDirectory || []
+  if (resourceIdPrefix) {
+    getGlobalData.resourceIdPrefix = resourceIdPrefix
+  }
   var extractOnly = false
   function output (filepath, strFileData) {
 

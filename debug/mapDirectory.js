@@ -1,26 +1,23 @@
 import mapDirectory from '../packages/directorymapper'
-import { writeFile, wordMapping } from '../packages/utils'
+import { writeFile, wordMapping, getGlobalData } from '../packages/utils'
 import { init as vueinit } from '../packages/vue'
 import scriptinit from '../packages/script'
 import { init as htmlinit, ast2string } from '../packages/html'
 import htmlrules from '../packages/rules/html'
-const { vueTagRule, vueTextRule } = htmlrules
+const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 const rootDir = "/Users/windknow/git/cpu-relief/" // "" //
-const sourceDir = rootDir + "src" // "code" // "code" //
-const destDir = rootDir + "src" // "coderesult" // "coderesult" //
-const wordDir = rootDir // "coderesult" // 
+const sourceDir = "code" // "code" //rootDir + "src" //
+const destDir = "coderesult" // "coderesult" //rootDir + "src" // 
+const wordDir = "coderesult" // rootDir // 
+getGlobalData.ignoreDirectory = ["/js", "/umd", "/report", "/h5", "/build", "/css", "/example", "/img"]
+var type = 'ko'
 mapDirectory(sourceDir, function (path, extendsion, fileData) {
-  try {
-    switch (extendsion) {
-      case 'vue': vueparser(path, fileData); break;
-      case 'js': jsparser(path, fileData); break;
-      case 'html': htmlparser(path, fileData); break;
-    }
-  } catch (e) {
-    console.error(e)
+  switch (extendsion) {
+    case 'vue': vueparser(path, fileData); break;
+    case 'js': jsparser(path, fileData); break;
+    case 'html': htmlparser(path, fileData); break;
   }
 }, function () {
-  console.log(wordMapping)
   writeFile(wordDir + "/words.json", JSON.stringify(wordMapping))
 })
 function output (path, strFileData) {
@@ -36,6 +33,16 @@ function jsparser (path, input) {
   output(path, result)
 }
 function htmlparser (path, input) {
-  var result = htmlinit(input, { tagRule: vueTagRule, textRule: vueTextRule })
+  var rules = {}
+  if (type == 'ko') {
+    rules = {
+      tagRule: koTagRule, textRule: koTextRule
+    }
+  } else {
+    rules = {
+      tagRule: vueTagRule, textRule: vueTextRule
+    }
+  }
+  var result = htmlinit(input, rules)
   output(path, ast2string(result))
 }

@@ -1,90 +1,73 @@
 import * as recast from 'recast';
 import scriptRule from '../../packages/rules/script'
 import chooseRule from '../rules/script/chooseRule'
-let koAttrReast = function(koTagNode){
+import { builders as b } from "ast-types";
+let koAttrReast = function (koTagNode) {
     let varStr = "var a = "//拼凑为reast可识别的结构
-    let value = koTagNode.value?.value ? koTagNode.value.value : koTagNode.value
-    let hasBrackets  = value.trim()[0] === "{"
-    
-    if(hasBrackets){//data-bind="text:xxx,html:xxx" => data-bind="{text:xxx,html:xxx}"
-        value = varStr + value 
-    }else{
-        value = `${varStr}{${value}}`
+    // 空字符串是允许存在的
+    let value = koTagNode.value?.value != undefined && koTagNode.value?.value != null ? koTagNode.value.value : koTagNode.value
+    let hasBrackets = value.trim()[0] === "{"
+    if (hasBrackets) {//data-bind="text:xxx,html:xxx" => data-bind="{text:xxx,html:xxx}"
+        value = varStr + value
+    } else {
+        value = `${ varStr }{${ value }}`
     }
-    
-    let str = ""
-    let attrStr = ""
     let recastNode = recast.parse(value)
-    
-    
+    if (koTagNode.nativeAttrs) {
+        let declaration = recastNode.program.body[0]?.declarations[0]
+        let properties = declaration.init.properties
+        let attrProperty = properties.filter(v => v.key.name === "attr")[0]
+        if (attrProperty) {
+            koTagNode.nativeAttrs.forEach(nativeAttr => {
+                attrProperty.value.properties.push(
+                    b.property(
+                        "init",
+                        b.identifier(nativeAttr.name),
+                        b.literal(nativeAttr.value)
+                    )
+                )
+            })
+        } else {
+            let arr = []
+            koTagNode.nativeAttrs.forEach(nativeAttr => {
+                arr.push(
+                    b.objectProperty(
+                        b.identifier(nativeAttr.name),
+                        b.literal(nativeAttr.value)
+                    )
+                )
 
-
-    let array =  recastNode.tokens
-    let startIndex = 0//attr:{xy:123}是{的下标
-    let endIndex = 0;//attr:{xy:123}是}的下标
-
-    for(let i = 0; i < array.length; i++){
-        let ele = array[i]
-        if(ele.value === "{" && array[i-2].value === "attr"){
-            startIndex = i
-            break;
+            })
+            let property = b.property(
+                "init",
+                b.identifier('attr'),
+                b.objectExpression(arr)//expresson里面数组，看label-types objectExpression
+            )
+            properties.push(property)
         }
-        if(i == 1 || i == 2){//保持变量空格 与varStr一致
-            str += ` ${ele.value}`
-        }else{
-            str += ele.value
-        }
-    }
-    if(startIndex == 0){//data-bind里面没有attr
-        str = str.slice(0,-1)
-        //koTagNode.nativeAttrs格式['placeholer:xxx',title:'xxx',xxx:'xxx']数组
-        if(koTagNode.nativeAttrs){
-            str += ",attr:{"
-        }
-        koTagNode.nativeAttrs && koTagNode.nativeAttrs.forEach(item => {
-            str += item
-        })
-        if(koTagNode.nativeAttrs){
-            str += "}"
-        }
-        str += '}'
-    }else{
-        let reduceNum = 0;
-        for(let i = startIndex; i < array.length; i++){
-            let ele = array[i]
-            
-            if(ele.value === "{" && ele.type === "Punctuator"){
-                reduceNum += 1
+        for (let i = 0; i < properties.length; i++) {
+            const ele = properties[i];
+            if (ele.key.name === "i18n") {
+                ele.key.name = 'i19n'
+                continue;
             }
-            if(ele.value === "}" && ele.type === "Punctuator"){
-                reduceNum -= 1
-            }
-            attrStr += ele.value//拼接字符串
-
-            if(reduceNum === 0 ){
-                endIndex = i
-                break;
-            }
+            chooseRule(ele)
         }
-        let attrValueStr = attrStr.slice(1,-1)//去掉前后括号
-        koTagNode.nativeAttrs && koTagNode.nativeAttrs.forEach(item => {
-            attrValueStr += `,${item}`
-        })
-        str += '{' + attrValueStr + '}'
-    }
-    if(startIndex > 0 &&  endIndex < array.length - 1){
-        for(let i = endIndex+1; i < array.length; i++){
-            let ele = array[i]
-            str += ele.value
+    } else {
+        let declaration = recastNode.program.body[0]?.declarations[0]
+        let properties = declaration.init.properties
+        for (let i = 0; i < properties.length; i++) {
+            const ele = properties[i];
+            if (ele.key.name === "i18n") {
+                ele.key.name = 'i19n'
+                continue;
+            }
+            chooseRule(ele)
         }
     }
-
-    
-    let reastStr = scriptRule(str)
-    reastStr = reastStr.slice(varStr.length -1)
-    if(!hasBrackets){
-        reastStr = reastStr.slice(1,-1)
-    }
-    return reastStr
+    let str = recast.print(recastNode).code
+    str = str.slice(varStr.length - 1).trim()//去掉var a = 
+    str = str.slice(1, -1)
+    return str
 }
 export default koAttrReast

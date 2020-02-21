@@ -1,4 +1,6 @@
 var globalData = {
-  quote: null
+  quote: null,
+  ignoreDirectory: [],
+  resourceIdPrefix: "YC_FED_"
 }
 export default globalData

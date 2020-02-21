@@ -1,6 +1,7 @@
 import chooseRule from './chooseRule'
 var rule = (expression) => {
-  chooseRule(expression.object)
-  chooseRule(expression.property)
+  expression.expressions.forEach(exp => {
+    chooseRule(exp)
+  })
 }
 export default rule

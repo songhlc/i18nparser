@@ -66,12 +66,43 @@
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
     },
     {
-      "name": "hashtest",
+      "type": "node",
+      "request": "launch",
+      "name": "java",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/debug/testhash.js",
+      "program": "${workspaceFolder}/debug/java.js",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
-    }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "mainVue",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/main.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "build",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/translate.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "translate-debug",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/debug/translate.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node"
+    },
   ]
 }

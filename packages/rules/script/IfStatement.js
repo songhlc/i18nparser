@@ -1,5 +1,4 @@
 import chooseRule from './chooseRule'
-import recast from 'recast'
 var rule = (expression) => {
   expression.test && chooseRule(expression.test)
   expression.alternate && chooseRule(expression.alternate) // 一般是BlockStatement

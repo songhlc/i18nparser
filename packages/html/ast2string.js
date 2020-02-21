@@ -8,7 +8,8 @@ function ast2String (ast, text) {
       text += item.value
     } else if (item.type === html.SyntaxKind.Tag) {
       if (item.name === "!--") {//<!-- ko text:xxx --><!-- /ko -->
-        text += item.open.value + item.body[0].value + item.close.value
+        var value = item.body ? item.body[0].value : ""
+        text += item.open.value + value + item.close.value
       } else {
         text += '<' + item.name
         item.attributes && item.attributes.forEach((attr, index) => {

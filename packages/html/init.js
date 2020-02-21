@@ -3,7 +3,7 @@ import * as html from 'html5parser-fork'
 import * as recast from "recast"
 import { needtranslate } from '../utils'
 import { scriptrules, tagrules, textrules } from './rules'
-var isInScript = false
+
 /**
  * 
  * @param {*} input 
@@ -15,16 +15,43 @@ var isInScript = false
  * } option 
  */
 function init (input, options = {}) {
-  const ast = html.parse(input);
+  var isInScript = false
+  var ast;
+  try {
+    ast = html.parse(input);
+  } catch (e) {
+    debugger
+  }
+
   const { tagRule, scriptRule, textRule, leave } = options
   html.walk(ast, {
     enter: (node) => {
       if (node.type === html.SyntaxKind.Tag) {
         if (node.name == "script") {
           isInScript = true
+          node.attributes.forEach(function (attr) {
+            // html模版（script引入）的方式还是文本来处理
+            if (attr.name?.value == "type" && attr.value?.value == "text/html") {
+              isInScript = false
+            }
+          })
+
         }
         if (node.name === "!--") {
-          node.body[0]._isComment = true
+          if (node.body) {
+            node.body[0]._isComment = true
+          }
+        }
+        // 统一处理方式
+        if (node.name === "title") {
+          if (node.body) {
+            node.body[0]._isTitle = true
+          }
+        }
+        if (node.name === "style") {
+          if (node.body) {
+            node.body[0]._translated = true
+          }
         }
         // node.open.value是tag的string值, 注释需要进行处理翻译
         if (needtranslate(node?.open?.value)) {
@@ -43,7 +70,8 @@ function init (input, options = {}) {
       } else {
         // html中解析内部js
         if (isInScript) {
-          const jsast = recast.parse(node.value);
+          var jsast;
+          jsast = recast.parse(node.value);
           // 默认规则
           scriptrules.forEach(rule => {
             rule(jsast)
@@ -55,17 +83,18 @@ function init (input, options = {}) {
           // js转换后重新解析
           const output = recast.print(jsast).code;
           node.value = output
-        }
-        if (needtranslate(node?.value)) {
-          textrules.forEach(rule => {
-            if (!node._translated)
-              rule(node)
-          })
-          // 自定义规则
-          textRule && textRule.forEach(rule => {
-            if (!node._translated)
-              rule(node)
-          })
+        } else {
+          if (needtranslate(node?.value)) {
+            textrules.forEach(rule => {
+              if (!node._translated)
+                rule(node)
+            })
+            // 自定义规则
+            textRule && textRule.forEach(rule => {
+              if (!node._translated)
+                rule(node)
+            })
+          }
         }
       }
     },
@@ -75,6 +104,7 @@ function init (input, options = {}) {
       }
     }
   });
+
   return ast
 }
 export default init

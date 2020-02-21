@@ -48,6 +48,11 @@ function init (input, options = {}) {
             node.body[0]._isTitle = true
           }
         }
+        if (node.name === "style") {
+          if (node.body) {
+            node.body[0]._translated = true
+          }
+        }
         // node.open.value是tag的string值, 注释需要进行处理翻译
         if (needtranslate(node?.open?.value)) {
           // 默认规则

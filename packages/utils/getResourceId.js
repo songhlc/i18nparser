@@ -7,6 +7,7 @@ import getGlobalData from './getGlobalData'
 export default function getResourceId (text) {
   var resouceId = getGlobalData.resourceIdPrefix + stringHash(text)
   try {
+    text = text.trim()
     wordMapping[resouceId] = text.replace(/\n/g, '')
   } catch (e) {
     wordMapping[resouceId] = text

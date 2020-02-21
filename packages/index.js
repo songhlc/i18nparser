@@ -63,7 +63,16 @@ var translate = (config) => {
       process.stdout.write("]")
       process.stdout.write("done")
       option?.extractCallback && option.extractCallback(wordMapping)
-      writeFile(outputPath + "/words.json", JSON.stringify(wordMapping))
+      var propertiseTxt = ""
+      Object.keys(wordMapping).forEach(key => {
+        propertiseTxt += key + '=' + wordMapping[key] + '\n'
+      })
+      var strData = JSON.stringify(wordMapping)
+      var jsTxt = "var words = " + strData + "\n"
+      jsTxt += "module.exports = words"
+      writeFile(outputPath + "/words.json", strData)
+      writeFile(outputPath + "/words.js", jsTxt)
+      writeFile(outputPath + "/words.properties", propertiseTxt)
     })
   }
 }

@@ -8,6 +8,7 @@ import htmlrules from './rules/html'
 const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 
 var spinner = null
+var _extractOnly = false
 var translate = (config) => {
   if (typeof config !== 'object') {
     thorw.Error('Error:params config should be typeof "object"!')
@@ -18,10 +19,9 @@ var translate = (config) => {
   if (resourceIdPrefix) {
     getGlobalData.resourceIdPrefix = resourceIdPrefix
   }
-  var extractOnly = extractOnly || false
+  _extractOnly = !!extractOnly
   function output (filepath, strFileData) {
-
-    if (!extractOnly) {
+    if (!_extractOnly) {
       filepath = filepath.replace(sourcePath, outputPath)
       writeFile(filepath, strFileData)
     }

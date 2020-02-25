@@ -51,7 +51,12 @@ const rule = node => {
     node.attributes.forEach(v => {
       if ((v?.name.value === "data-bind" || v?.name.value === "params" || v?.name.value === "options") && needtranslate(v.value?.value)) {
         getGlobalData.quote = v.value.quote
-        v.value.value = koAttrReast(v)
+        if (v?.name.value === "options") {
+          v.value.value = koAttrReast(v, true)
+        } else {
+          v.value.value = koAttrReast(v)
+        }
+        
         getGlobalData.quote = null
       }
     })

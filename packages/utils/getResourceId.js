@@ -8,7 +8,9 @@ export default function getResourceId (text) {
   var resouceId = getGlobalData.resourceIdPrefix + stringHash(text)
   try {
     text = text.trim()
-    wordMapping[resouceId] = text.replace(/\n/g, '')
+    text = text.replace(/\n/g, '')
+    // html中存在&nbsp;这样的占位符，不能删掉，需要转换成空格
+    wordMapping[resouceId] = text.replace(/&nbsp;/g, ' ')
   } catch (e) {
     wordMapping[resouceId] = text
     // TODO：正则表达式

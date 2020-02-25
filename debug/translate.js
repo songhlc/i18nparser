@@ -7,7 +7,7 @@ var config = {
   needTranslate: null,
   type: 'ko',
   resourceIdPrefix: 'FE_',
-  extractOnly: true
+  ignoreComment: true
 }
 i18nparser.translate(config)({
   extractCallback: function (data) {

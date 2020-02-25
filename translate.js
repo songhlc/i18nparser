@@ -8,7 +8,6 @@ var config = {
   needTranslate: null,
   type: 'ko'
 }
-module.exports = config
 i18nparser.translate(config)({
   type: 'vue'
 })

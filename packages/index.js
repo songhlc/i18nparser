@@ -14,8 +14,12 @@ var translate = (config) => {
     thorw.Error('Error:params config should be typeof "object"!')
     return;
   }
-  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory, resourceIdPrefix, extractOnly } = config
+  var { sourcePath, outputPath, needTranslate, type, ignoreDirectory,
+    resourceIdPrefix,
+    extractOnly,
+    ignoreComment } = config
   getGlobalData.ignoreDirectory = ignoreDirectory || []
+  getGlobalData.ignoreComment = ignoreComment || false
   if (resourceIdPrefix) {
     getGlobalData.resourceIdPrefix = resourceIdPrefix
   }
@@ -52,28 +56,31 @@ var translate = (config) => {
     if (!type) {
       type = "vue"
     }
-    mapDirectory(sourcePath, function (path, extendsion, fileData) {
-      switch (extendsion) {
-        case 'vue': vueparser(path, fileData); break;
-        case 'js': jsparser(path, fileData); break;
-        case 'html': htmlparser(path, fileData, type); break;
-        case 'java': break;
-      }
-    }, function () {
-      process.stdout.write("]")
-      process.stdout.write("done")
-      option?.extractCallback && option.extractCallback(wordMapping)
-      var propertiseTxt = ""
-      Object.keys(wordMapping).forEach(key => {
-        propertiseTxt += key + '=' + wordMapping[key] + '\n'
+    try {
+      mapDirectory(sourcePath, function (path, extendsion, fileData) {
+        switch (extendsion) {
+          case 'vue': vueparser(path, fileData); break;
+          case 'js': jsparser(path, fileData); break;
+          case 'html': htmlparser(path, fileData, type); break;
+          case 'java': break;
+        }
+      }, function () {
+        process.stdout.write("]")
+        process.stdout.write("done")
+        option?.extractCallback && option.extractCallback(wordMapping)
+        var propertiseTxt = ""
+        Object.keys(wordMapping).forEach(key => {
+          propertiseTxt += key + '=' + wordMapping[key] + '\n'
+        })
+        var strData = JSON.stringify(wordMapping)
+        var jsTxt = "var words = " + strData
+        writeFile(outputPath + "/words.json", strData)
+        writeFile(outputPath + "/words.js", jsTxt)
+        writeFile(outputPath + "/words.properties", propertiseTxt)
       })
-      var strData = JSON.stringify(wordMapping)
-      var jsTxt = "var words = " + strData + "\n"
-      jsTxt += "module.exports = words"
-      writeFile(outputPath + "/words.json", strData)
-      writeFile(outputPath + "/words.js", jsTxt)
-      writeFile(outputPath + "/words.properties", propertiseTxt)
-    })
+    } catch (e) {
+      debugger
+    }
   }
 }
 export default {

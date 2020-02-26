@@ -1,6 +1,6 @@
 import path from 'path'
 import mapDirectory from './directorymapper'
-import { writeFile, wordMapping, getGlobalData } from './utils'
+import { writeFile, wordMapping, getGlobalData, needtranslate as defaultNeedTranslate } from './utils'
 import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
@@ -20,6 +20,9 @@ var translate = (config) => {
     ignoreComment } = config
   getGlobalData.ignoreDirectory = ignoreDirectory || []
   getGlobalData.ignoreComment = ignoreComment || false
+  if (!needTranslate) {
+    needTranslate = defaultNeedTranslate
+  }
   if (resourceIdPrefix) {
     getGlobalData.resourceIdPrefix = resourceIdPrefix
   }
@@ -32,20 +35,26 @@ var translate = (config) => {
     process.stdout.write("=")
   }
   function vueparser (path, input) {
-    var result = vueinit(input)
-    output(path, result)
+    if (needTranslate(input)) {
+      var result = vueinit(input)
+      output(path, result)
+    }
   }
   function jsparser (path, input) {
-    var result = scriptinit(input)
-    output(path, result)
+    if (needTranslate(input)) {
+      var result = scriptinit(input)
+      output(path, result)
+    }
   }
   function htmlparser (path, input, type) {
-    var result;
-    switch (type) {
-      case 'vue': result = htmlinit(input, { tagRule: vueTagRule, textRule: vueTextRule }); break;
-      case 'ko': result = htmlinit(input, { tagRule: koTagRule, textRule: koTextRule })
+    if (needTranslate(input)) {
+      var result;
+      switch (type) {
+        case 'vue': result = htmlinit(input, { tagRule: vueTagRule, textRule: vueTextRule }); break;
+        case 'ko': result = htmlinit(input, { tagRule: koTagRule, textRule: koTextRule })
+      }
+      output(path, ast2string(result))
     }
-    output(path, ast2string(result))
   }
   return function (option) {
     process.stdout.write("[")

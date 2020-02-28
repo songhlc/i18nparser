@@ -10,9 +10,9 @@ const rule = (node) => {
         // html comment中出现(会有bug
         var comment = node.value.replace(/\(|\)/g, "");
         if (getGlobalData.ignoreComment) {
-            node.value = `<!-- ko text: ${ TRANSLATE_METHOD }('${ getResourceId(node.value) }'/*${ comment }*/)--><!-- /ko -->`
-        } else {
             node.value = `<!-- ko text: ${ TRANSLATE_METHOD }('${ getResourceId(node.value) }')--><!-- /ko -->`
+        } else {
+            node.value = `<!-- ko text: ${ TRANSLATE_METHOD }('${ getResourceId(node.value) }'/*${ comment }*/)--><!-- /ko -->`
         }
         
     }

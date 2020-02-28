@@ -9,7 +9,9 @@ export default function getResourceId (text) {
   try {
     text = text.replace(/\n/g, '')
     text = text.trim()
-    text = text.replace(/&nbsp;/g, '')
+    // html里的&nbsp;转成空格然后再trim
+    text = text.replace(/&nbsp;/g, ' ')
+    text = text.trim()
     resouceId = getGlobalData.resourceIdPrefix + stringHash(text)
     // html中存在&nbsp;这样的占位符，不能删掉，需要转换成空格
     wordMapping[resouceId] = text

@@ -63,6 +63,7 @@ var translate = (config) => {
   return function (option) {
     process.stdout.write("[")
     extractOnly = option?.extractOnly
+    var extractEnd = option.extractEnd
     if (!outputPath) {
       outputPath = sourcePath
     }
@@ -87,6 +88,9 @@ var translate = (config) => {
         })
         var strData = JSON.stringify(wordMapping)
         var jsTxt = "var words = " + strData
+        if (extractEnd) {
+          extractEnd(wordMapping)
+        }
         writeFile(outputPath + "/words.json", strData)
         writeFile(outputPath + "/words.js", jsTxt)
         writeFile(outputPath + "/words.properties", propertiseTxt)

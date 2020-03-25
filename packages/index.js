@@ -42,8 +42,12 @@ var translate = (config) => {
   }
   function jsparser (path, input) {
     if (needTranslate(input)) {
-      var result = scriptinit(input)
-      output(path, result)
+      try {
+        var result = scriptinit(input)
+        output(path, result)
+      } catch (e) {
+        console.error("文件" + path + ": js解析出错")
+      }
     }
   }
   function htmlparser (path, input, type) {

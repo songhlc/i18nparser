@@ -25,7 +25,7 @@ function ast2String (ast, text) {
           }
         })
         if (item.name.toLowerCase() == '!doctype') {
-          text += ' html'
+          
         }
         text += '>'
         if (item.body) {

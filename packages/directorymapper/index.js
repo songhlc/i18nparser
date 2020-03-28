@@ -7,7 +7,7 @@ function readFileStr (file, callback) {
   var str = fs.readFileSync(file).toString()
   return callback(file, str)
 }
-var fileextensions = ['.js', '.vue', '.html']
+var fileextensions = ['.js', '.vue', '.html', '.ejs']
 var callbackmapping = null
 var fileLength = 0
 var readedFileLength = 0

@@ -76,6 +76,7 @@ var translate = (config) => {
           case 'vue': vueparser(path, fileData); break;
           case 'js': jsparser(path, fileData); break;
           case 'html': htmlparser(path, fileData, type); break;
+          case 'ejs': htmlparser(path, fileData, type); break;
           case 'java': break;
         }
       }, function () {

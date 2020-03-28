@@ -33,6 +33,9 @@ mapDirectory(
       case 'html':
         htmlparser(path, fileData)
         break
+      case 'ejs':
+        htmlparser(path, fileData)
+        break
     }
   },
   function() {

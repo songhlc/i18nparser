@@ -41,7 +41,6 @@ function mapDir (dir, callback, finish) {
           // fileLength++
           readFileStr(pathname, function (filepath, fileData) {
             callback && callback(filepath, getExtendsion(filepath), fileData)
-            console.log(filepath)
             readedFileLength++
           })
         }

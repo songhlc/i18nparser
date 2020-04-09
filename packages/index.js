@@ -72,6 +72,7 @@ var translate = (config) => {
     }
     try {
       mapDirectory(sourcePath, function (path, extendsion, fileData) {
+        console.log('start:' + path)
         switch (extendsion) {
           case 'vue': vueparser(path, fileData); break;
           case 'js': jsparser(path, fileData); break;

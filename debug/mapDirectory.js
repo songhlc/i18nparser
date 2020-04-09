@@ -19,7 +19,7 @@ getGlobalData.ignoreDirectory = [
   '/example',
   '/img'
 ]
-var type = 'ko'
+var type = 'vue'
 mapDirectory(
   sourceDir,
   function(path, extendsion, fileData) {
@@ -47,6 +47,7 @@ function output(path, strFileData) {
   writeFile(path, strFileData)
 }
 function vueparser(path, input) {
+  debugger
   var result = vueinit(input)
   output(path, result)
 }

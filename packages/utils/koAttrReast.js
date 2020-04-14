@@ -2,7 +2,8 @@ import * as recast from 'recast';
 import scriptRule from '../../packages/rules/script'
 import chooseRule from '../rules/script/chooseRule'
 import { builders as b } from "ast-types";
-let koAttrReast = function (koTagNode) {
+// 如果 v?.name.value === "options" 要保留左边的{
+let koAttrReast = function (koTagNode, needFlag) {
     let varStr = "var a = "//拼凑为reast可识别的结构
     // 空字符串是允许存在的
     let value = koTagNode.value?.value != undefined && koTagNode.value?.value != null ? koTagNode.value.value : koTagNode.value
@@ -67,7 +68,9 @@ let koAttrReast = function (koTagNode) {
     }
     let str = recast.print(recastNode).code
     str = str.slice(varStr.length - 1).trim()//去掉var a = 
-    str = str.slice(1, -1)
+    if (!needFlag) {
+        str = str.slice(1, -1)
+    }
     return str
 }
 export default koAttrReast

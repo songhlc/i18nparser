@@ -1,6 +1,6 @@
 {
   "name": "i18n-full-parser",
-  "version": "1.1.0",
+  "version": "1.1.16",
   "main": "lib/index.min.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
   "author": "songhlc <369585552@qq.com>",
@@ -12,7 +12,7 @@
   },
   "jest": {},
   "dependencies": {
-    "html5parser-fork": "^1.1.2-beta",
+    "html5parser-fork": "^1.1.5-beta",
     "ora": "^4.0.3",
     "recast": "^0.18.5",
     "string-hash": "^1.1.3",

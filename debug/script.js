@@ -47,10 +47,7 @@ a = {
 h('div', '询价发布时间')
 h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
 `
-input = `
-cb.lang.template("test");
-cb.lang.template('test');
-`
+input = "var a = `<p><span>账期: </span>${ taxMoney || '0' }</p>`"
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
  * 

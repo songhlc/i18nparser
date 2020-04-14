@@ -25,6 +25,10 @@ import ArrowFunctionExpression from './ArrowFunctionExpression'
 import SequenceExpression from './SequenceExpression'
 import CatchClause from './CatchClause'
 import TemplateLiteral from './TemplateLiteral'
+import TemplateElement from './TemplateElement'
+import ClassDeclaration from './ClassDeclaration'
+import ClassBody from './ClassBody'
+import MethodDefinition from './MethodDefinition'
 import { print } from 'recast'
 var chooseRule = (expression, parentNode, attrKey) => {
   // if (code.indexOf('data () {') >= 0) {
@@ -33,7 +37,6 @@ var chooseRule = (expression, parentNode, attrKey) => {
   // }
   var code = print(expression).code
   if (!expression) {
-    debugger
     console.log(JSON.stringify(expression))
     throw Error('expression.type should not be null')
   }
@@ -66,6 +69,10 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ArrowFunctionExpression': ArrowFunctionExpression(expression); break;
     case 'CatchClause': CatchClause(expression); break;
     case 'TemplateLiteral': TemplateLiteral(expression); break;
+    case 'TemplateElement': TemplateElement(expression, parentNode, attrKey); break;
+    case 'ClassDeclaration': ClassDeclaration(expression); break;
+    case 'ClassBody': ClassBody(expression);break;
+    case 'MethodDefinition': MethodDefinition(expression);break;
     case 'ThrowStatement': ;
     case 'EmptyStatement': ;
     case 'ContinueStatement': ;

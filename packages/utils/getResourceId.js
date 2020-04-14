@@ -5,10 +5,16 @@ import wordMapping from './wordMapping'
 import getGlobalData from './getGlobalData'
 // TODO:要把资源id最后的数字转成10为顺序数字
 export default function getResourceId (text) {
-  var resouceId = getGlobalData.resourceIdPrefix + stringHash(text)
+  var resouceId = ""
   try {
+    text = text.replace(/\n/g, '')
     text = text.trim()
-    wordMapping[resouceId] = text.replace(/\n/g, '')
+    // html里的&nbsp;转成空格然后再trim
+    text = text.replace(/&nbsp;/g, ' ')
+    text = text.trim()
+    resouceId = getGlobalData.resourceIdPrefix + stringHash(text)
+    // html中存在&nbsp;这样的占位符，不能删掉，需要转换成空格
+    wordMapping[resouceId] = text
   } catch (e) {
     wordMapping[resouceId] = text
     // TODO：正则表达式

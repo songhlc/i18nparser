@@ -2344,10 +2344,10 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.0.tgz#71e87f931de3fe09e56661ab9a29aadec707b491"
   integrity sha512-a4u9BeERWGu/S8JiWEAQcdrg9v4QArtP9keViQjGMdff20fBdd8waotXaNmODqBe6uZ3Nafi7K/ho4gCQHV3Ig==
 
-html5parser-fork@^1.1.2-beta:
-  version "1.1.2-beta"
-  resolved "https://registry.yarnpkg.com/html5parser-fork/-/html5parser-fork-1.1.2-beta.tgz#cfd89162fd418144a96638b2b3561d8e5d9bd316"
-  integrity sha512-avDfc3af0RTkqLkbTu78RnFHJhxJO5+VkmCqgrU5YjqDAkBskq+YvKsrHg+LctqST8c8TZQJ5huYZ//nkHKayA==
+html5parser-fork@^1.1.5-beta:
+  version "1.1.5-beta"
+  resolved "https://registry.yarnpkg.com/html5parser-fork/-/html5parser-fork-1.1.5-beta.tgz#f75e3e834dc04b5ccda1fb34afe1327a9da36056"
+  integrity sha512-8hmliRFNfUORbvorHpvSLuwo7cwDe2aBdpmKUq6bGRlI4cEn2F1Z2aSNALN5NgpQfCSW/IglkJF+Gq2Str0C4Q==
   dependencies:
     tslib "^1.10.0"
 

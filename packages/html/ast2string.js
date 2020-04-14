@@ -33,6 +33,8 @@ function ast2String (ast, text) {
         }
         if (item.close) {
           text += item.close.value
+        } else if (item.name ==='textarea') { // 会存在一些textarea 写成<textarea/>的写法，纠正过来
+          text += '</textarea>'
         }
       }
     }

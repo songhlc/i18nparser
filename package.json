@@ -1,6 +1,6 @@
 {
   "name": "i18n-full-parser",
-  "version": "1.1.16",
+  "version": "1.1.18",
   "main": "lib/index.min.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
   "author": "songhlc <369585552@qq.com>",
@@ -16,8 +16,7 @@
     "ora": "^4.0.3",
     "recast": "^0.18.5",
     "string-hash": "^1.1.3",
-    "tree-sitter": "^0.16.0",
-    "tree-sitter-java": "^0.16.0"
+    "tree-sitter": "^0.16.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
@@ -31,6 +30,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "jest": "^24.9.0",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0"
+    "rollup-plugin-commonjs": "^10.1.0",
+    "tree-sitter-java": "^0.16.0"
   }
 }

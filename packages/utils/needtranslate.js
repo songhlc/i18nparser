@@ -10,7 +10,7 @@ export default function needtranslate (text, locale) {
   }
   var testText = typeof (str) == 'string' ? text.trim() : text
   switch (locale) {
-    case 'zhcn': return /(.||\n)*[\u4e00-\u9fa5]+(.||\n)*$/.test(testText); break;
+    case 'zhcn': return /[\u4E00-\u9FFF]+/.test(testText) || /(.||\n)*[\u4e00-\u9fa5]+(.||\n)*$/.test(testText); break;
     case 'enus': return /a-zA-Z*/.test(text); break;
   }
 }

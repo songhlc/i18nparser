@@ -14,40 +14,7 @@ import { needtranslate, generateCallExpression } from '../packages/utils'
 //   a(cb.t('xxx-id'))
 //   a("这是个什么问题")
 // `
-var input = `
-root.$Message.success(cb.lang.template("needtranslate"),'当前单据没有走审批流');
-var b = '现金';
-var b = '现金：'+ 10000;
-var a;
-a = {
-  data () {
-    return {
-      name: 1,
-      buyofferType: [
-        {
-          value: '1',
-          label: '框架协议'
-        },
-        {
-          value: '2',
-          label: '普通合同'
-        },
-        {
-          value: '3',
-          label: '直接下单'
-        },
-        {
-          value: '4',
-          label: '价格调整'
-        }
-      ]
-    }
-  }
-}
-h('div', '询价发布时间')
-h('div', params.row.archiveStatus == '1' ? '已归档' : '未归档')
-`
-input = "var a = `<p><span>账期: </span>${ taxMoney || '0' }</p>`"
+var input = "var a = `<p><span>` + '账期: '+ `</span>${ taxMoney || '0' }</p>`"
 /** 需要处理的 
  *   `root.$Message.success('当前单据没有走审批流')`  ExpressionStatement 
  * 

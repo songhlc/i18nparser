@@ -19,10 +19,11 @@ getGlobalData.ignoreDirectory = [
   '/example',
   '/img'
 ]
-var type = 'vue'
+var type = 'ko'
 mapDirectory(
   sourceDir,
   function(path, extendsion, fileData) {
+    console.log(path)
     switch (extendsion) {
       case 'vue':
         vueparser(path, fileData)

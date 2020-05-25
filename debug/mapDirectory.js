@@ -9,6 +9,7 @@ const rootDir = '/Users/windknow/git/cpu-relief/' // "" //
 const sourceDir = 'code' // "code" //rootDir + "src" //
 const destDir = 'coderesult' // "coderesult" //rootDir + "src" //
 const wordDir = 'coderesult' // rootDir //
+getGlobalData.useWindow = true
 getGlobalData.ignoreDirectory = [
   '/js',
   '/umd',

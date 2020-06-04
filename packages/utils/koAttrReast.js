@@ -1,6 +1,7 @@
 import * as recast from 'recast';
 import scriptRule from '../../packages/rules/script'
 import chooseRule from '../rules/script/chooseRule'
+import globalData from './getGlobalData'
 import { builders as b } from "ast-types";
 // 如果 v?.name.value === "options" 要保留左边的{
 let koAttrReast = function (koTagNode, needFlag) {
@@ -68,6 +69,9 @@ let koAttrReast = function (koTagNode, needFlag) {
     }
     let str = recast.print(recastNode).code
     str = str.slice(varStr.length - 1).trim()//去掉var a = 
+    // 把data-title转换成"data-title" 根据当前输入的括号来决定
+    var curQuote = globalData.quote == '"' ? "'" : '"'
+    str = str.replace(/data-title:/g, `${curQuote}data-title${curQuote}:`)
     if (!needFlag) {
         str = str.slice(1, -1)
     }

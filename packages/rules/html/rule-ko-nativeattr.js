@@ -3,7 +3,7 @@ const rule = (node) => {
   let cache = []
   let filterAttrs = []
   node.attributes.forEach(v => {
-    let nativeAttrs = ['title', 'placeholder', 'value']
+    let nativeAttrs = ['data-title', 'title', 'placeholder', 'value']
     let _index = nativeAttrs.indexOf(v.name.value)
     if (_index >= 0 && needtranslate(v.value.value)) {
       filterAttrs.push(nativeAttrs[_index])

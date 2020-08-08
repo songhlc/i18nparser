@@ -14,67 +14,72 @@ let koAttrReast = function (koTagNode, needFlag) {
     } else {
         value = `${ varStr }{${ value }}`
     }
-    let recastNode = recast.parse(value)
-    if (koTagNode.nativeAttrs) {
-        let declaration = recastNode.program.body[0]?.declarations[0]
-        let properties = declaration.init.properties
-        let attrProperty = properties.filter(v => v.key.name === "attr")[0]
-        if (attrProperty) {
-            koTagNode.nativeAttrs.forEach(nativeAttr => {
-                attrProperty.value.properties.push(
-                    b.property(
-                        "init",
-                        b.identifier(nativeAttr.name),
-                        b.literal(nativeAttr.value)
+    try {
+        let recastNode = recast.parse(value)
+        if (koTagNode.nativeAttrs) {
+            let declaration = recastNode.program.body[0]?.declarations[0]
+            let properties = declaration.init.properties
+            let attrProperty = properties.filter(v => v.key.name === "attr")[0]
+            if (attrProperty) {
+                koTagNode.nativeAttrs.forEach(nativeAttr => {
+                    attrProperty.value.properties.push(
+                        b.property(
+                            "init",
+                            b.identifier(nativeAttr.name),
+                            b.literal(nativeAttr.value)
+                        )
                     )
-                )
-            })
-        } else {
-            let arr = []
-            koTagNode.nativeAttrs.forEach(nativeAttr => {
-                arr.push(
-                    b.objectProperty(
-                        b.identifier(nativeAttr.name),
-                        b.literal(nativeAttr.value)
+                })
+            } else {
+                let arr = []
+                koTagNode.nativeAttrs.forEach(nativeAttr => {
+                    arr.push(
+                        b.objectProperty(
+                            b.identifier(nativeAttr.name),
+                            b.literal(nativeAttr.value)
+                        )
                     )
-                )
 
-            })
-            let property = b.property(
-                "init",
-                b.identifier('attr'),
-                b.objectExpression(arr)//expresson里面数组，看label-types objectExpression
-            )
-            properties.push(property)
-        }
-        for (let i = 0; i < properties.length; i++) {
-            const ele = properties[i];
-            if (ele.key.name === "i18n") {
-                ele.key.name = 'i19n'
-                continue;
+                })
+                let property = b.property(
+                    "init",
+                    b.identifier('attr'),
+                    b.objectExpression(arr)//expresson里面数组，看label-types objectExpression
+                )
+                properties.push(property)
             }
-            chooseRule(ele)
-        }
-    } else {
-        let declaration = recastNode.program.body[0]?.declarations[0]
-        let properties = declaration.init.properties
-        for (let i = 0; i < properties.length; i++) {
-            const ele = properties[i];
-            if (ele.key.name === "i18n") {
-                ele.key.name = 'i19n'
-                continue;
+            for (let i = 0; i < properties.length; i++) {
+                const ele = properties[i];
+                if (ele.key.name === "i18n") {
+                    ele.key.name = 'i19n'
+                    continue;
+                }
+                chooseRule(ele)
             }
-            chooseRule(ele)
+        } else {
+            let declaration = recastNode.program.body[0]?.declarations[0]
+            let properties = declaration.init.properties
+            for (let i = 0; i < properties.length; i++) {
+                const ele = properties[i];
+                if (ele.key.name === "i18n") {
+                    ele.key.name = 'i19n'
+                    continue;
+                }
+                chooseRule(ele)
+            }
         }
-    }
-    let str = recast.print(recastNode).code
-    str = str.slice(varStr.length - 1).trim()//去掉var a = 
-    // 把data-title转换成"data-title" 根据当前输入的括号来决定
-    var curQuote = globalData.quote == '"' ? "'" : '"'
-    str = str.replace(/data-title:/g, `${curQuote}data-title${curQuote}:`)
-    if (!needFlag) {
-        str = str.slice(1, -1)
-    }
-    return str
+        let str = recast.print(recastNode).code
+        str = str.slice(varStr.length - 1).trim()//去掉var a = 
+        // 把data-title转换成"data-title" 根据当前输入的括号来决定
+        var curQuote = globalData.quote == '"' ? "'" : '"'
+        str = str.replace(/data-title:/g, `${curQuote}data-title${curQuote}:`)
+        if (!needFlag) {
+            str = str.slice(1, -1)
+        }
+        return str
+    } catch (e) {
+        console.error("以下代码报错：" + value)
+        throw Error(e)
+    }   
 }
 export default koAttrReast

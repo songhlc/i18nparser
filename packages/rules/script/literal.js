@@ -4,7 +4,13 @@ var rule = (Literal, parentNode, attrKey) => {
     if (parentNode) {
       // 非正则表达式类型才处理
       if (!Literal.regex) {
-        parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value), Literal.value, getGlobalData.quote)
+        if (parentNode._iscblang) {
+          var text = getResourceId(Literal.value)
+          parentNode[attrKey].value = text
+          parentNode[attrKey].raw = text
+        } else {
+          parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value), Literal.value, getGlobalData.quote)
+        }
       }
     }
   }

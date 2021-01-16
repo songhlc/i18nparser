@@ -10,6 +10,7 @@ import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
+import {setTextMapping} from './utils/wordMapping'
 const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 
 var spinner = null
@@ -29,7 +30,9 @@ var translate = (config) => {
     extractOnly,
     ignoreComment,
     useWindow,
+    originData
   } = config
+  getGlobalData.originData = originData || {}
   getGlobalData.ignoreDirectory = ignoreDirectory || []
   getGlobalData.ignoreComment = ignoreComment || false
   getGlobalData.useWindow = useWindow || false

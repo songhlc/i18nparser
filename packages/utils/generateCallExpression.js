@@ -8,7 +8,7 @@ const {
   commentBlock,
 } = recast.types.builders
 // 传入资源id 生成：cb.lang.template("${ resid }")格式的语法
-export default function generateCallExpression(resid, originText, quote) {
+export default function generateCallExpression(resid, originText, quote, fnName = 'template') {
   originText = originText.replace(/\(|\)/g, '')
   // 文本添加注释
   var comment = commentBlock(originText, false, true)
@@ -24,14 +24,15 @@ export default function generateCallExpression(resid, originText, quote) {
   var expression = null
   if (!getGlobalData.useWindow) {
     expression = callExpression(
-      memberExpression(memberExpression(id('cb'), id('lang')), id('template')),
+      memberExpression(memberExpression(id('cb'), id('lang')), id(fnName)),
       [text]
     )
   } else {
+    // window.cb.lang.template
     expression = callExpression(
       memberExpression(
         memberExpression(memberExpression(id('window'), id('cb')), id('lang')),
-        id('template')
+        id(fnName)
       ),
       [text]
     )

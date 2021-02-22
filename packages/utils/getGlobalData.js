@@ -12,6 +12,7 @@ var globalData = {
       textMap[originData[key]] = key
     })
     return textMap
-  }
+  },
+  supportShortTempalte: false
 }
 export default globalData

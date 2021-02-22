@@ -12,11 +12,12 @@ var rule = (Literal, parentNode, attrKey) => {
         } else {
           var textMapping = getGlobalData.getTextMapping()
           // 如果textMapping中存在则直接使用
+          var sst = getGlobalData.supportShortTempalte
           if (textMapping[Literal.value]) {
             parentNode[attrKey] = generateCallExpression(textMapping[Literal.value], Literal.value, getGlobalData.quote)
-          } else if (textMapping[Literal.value+':']){
+          } else if (sst && textMapping[Literal.value+':']){
             parentNode[attrKey] = generateCallExpression(textMapping[Literal.value+':'], Literal.value, getGlobalData.quote, 'shortTemplate')
-          } else if (textMapping[Literal.value+'：']) {
+          } else if (sst && textMapping[Literal.value+'：']) {
             parentNode[attrKey] = generateCallExpression(textMapping[Literal.value+'：'], Literal.value, getGlobalData.quote, 'shortTemplate')
           } else {
             parentNode[attrKey] = generateCallExpression(getResourceId(Literal.value), Literal.value, getGlobalData.quote)

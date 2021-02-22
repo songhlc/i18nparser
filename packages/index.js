@@ -30,12 +30,14 @@ var translate = (config) => {
     extractOnly,
     ignoreComment,
     useWindow,
-    originData
+    originData,
+    supportShortTempalte
   } = config
   getGlobalData.originData = originData || {}
   getGlobalData.ignoreDirectory = ignoreDirectory || []
   getGlobalData.ignoreComment = ignoreComment || false
   getGlobalData.useWindow = useWindow || false
+  getGlobalData.supportShortTempalte = supportShortTempalte || false
   if (!needTranslate) {
     needTranslate = defaultNeedTranslate
   }

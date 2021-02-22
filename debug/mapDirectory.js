@@ -13,6 +13,7 @@ getGlobalData.useWindow = true
 getGlobalData.originData = {
   'YC_FED_530997052': '您没有预制导出模板，请联系管理员。:',
 }
+getGlobalData.supportShortTempalte = true
 getGlobalData.ignoreDirectory = [
   '/js',
   '/umd',

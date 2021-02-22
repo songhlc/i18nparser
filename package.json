@@ -15,8 +15,7 @@
     "html5parser-fork": "^1.1.5-beta",
     "ora": "^4.0.3",
     "recast": "^0.18.5",
-    "string-hash": "^1.1.3",
-    "tree-sitter": "^0.16.0"
+    "string-hash": "^1.1.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
@@ -30,7 +29,6 @@
     "clean-webpack-plugin": "^3.0.0",
     "jest": "^24.9.0",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "tree-sitter-java": "^0.16.0"
+    "rollup-plugin-commonjs": "^10.1.0"
   }
 }

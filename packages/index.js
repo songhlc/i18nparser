@@ -10,7 +10,6 @@ import { init as vueinit } from './vue'
 import scriptinit from './script'
 import { init as htmlinit, ast2string } from './html'
 import htmlrules from './rules/html'
-import {setTextMapping} from './utils/wordMapping'
 const { vueTagRule, vueTextRule, koTagRule, koTextRule } = htmlrules
 
 var spinner = null

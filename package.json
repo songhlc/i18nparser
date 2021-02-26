@@ -1,6 +1,6 @@
 {
   "name": "i18n-full-parser",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "lib/index.min.js",
   "repository": "https://github.com/songhlc/i18nparser.git",
   "author": "songhlc <369585552@qq.com>",

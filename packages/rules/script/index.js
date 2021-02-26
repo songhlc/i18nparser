@@ -8,7 +8,9 @@ import chooseRule from './chooseRule'
 import { needtranslate, getGlobalData } from '../../utils'
 var rule = (input, quote) => {
   getGlobalData.quote = quote
-  var ast = recast.parse(input)
+  var ast = recast.parse(input, {
+    parser: require("recast/parsers/babel"),
+  })
   // see more details in https://github.com/benjamn/ast-types/blob/master/gen/visitor.ts
   recast.visit(ast, {
     // vue节点 有时候直接以export default开头

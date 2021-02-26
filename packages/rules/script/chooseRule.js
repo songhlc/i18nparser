@@ -30,6 +30,9 @@ import ClassDeclaration from './ClassDeclaration'
 import ClassBody from './ClassBody'
 import MethodDefinition from './MethodDefinition'
 import { print } from 'recast'
+import WhileStatement from './WhileStatement'
+import ClassMethod from './ClassMethod'
+import DoWhileStatement from './DoWhileStatement'
 var chooseRule = (expression, parentNode, attrKey) => {
   // if (code.indexOf('data () {') >= 0) {
   //   console.log(code)
@@ -37,6 +40,7 @@ var chooseRule = (expression, parentNode, attrKey) => {
   // }
   var code = print(expression).code
   if (!expression) {
+    debugger
     console.log(JSON.stringify(expression))
     throw Error('expression.type should not be null')
   }
@@ -47,7 +51,13 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'BinaryExpression': BinaryExpression(expression); break;  // a == b
     case 'LogicalExpression': logicalExpression(expression); break; // a || b
     case 'Identifier': break; // var a
-    case 'Literal': literal(expression, parentNode, attrKey); break; // "test"
+    case 'NullLiteral':
+    case 'RegExpLiteral':
+    case 'BooleanLiteral':
+    case 'NumericLiteral': break;
+    case 'StringLiteral':
+    case 'Literal': 
+      literal(expression, parentNode, attrKey); break; // "test"
     case 'ObjectExpression': ObjectExpression(expression); break; //{a:1,b:2}
     case 'ArrayExpression': ArrayExpression(expression); break; // [1,2,3,4]
     case 'FunctionExpression': FunctionExpression(expression); break; // function () {}
@@ -82,6 +92,11 @@ var chooseRule = (expression, parentNode, attrKey) => {
     case 'ThisExpression': break; // this
     case 'BreakStatement': break;
     case 'UnaryExpression': break;
+    case 'ForOfStatement': break;
+    case 'ClassMethod': ClassMethod(expression);break;
+    case 'WhileStatement': WhileStatement(expression);break;
+    case 'DoWhileStatement': DoWhileStatement(expression);break;
+    case 'ImportDeclaration': break;
     default: console.log("notexist:" + expression.type + " ==" + code); break;
   }
 }

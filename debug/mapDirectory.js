@@ -13,7 +13,7 @@ getGlobalData.useWindow = true
 getGlobalData.originData = {
   'YC_FED_530997052': '您没有预制导出模板，请联系管理员。:',
 }
-getGlobalData.supportShortTempalte = true
+getGlobalData.supportShortTempalte = false
 getGlobalData.ignoreDirectory = [
   '/js',
   '/umd',
@@ -61,7 +61,7 @@ function jsparser(path, input) {
     var result = scriptinit(input)
     output(path, result)
   } catch (e) {
-    debugger
+    console.error(e)
     console.error('文件' + path + ': js解析出错')
   }
 }
